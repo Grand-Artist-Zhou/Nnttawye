@@ -13,6 +13,7 @@
 		CBE3D99226F6D0A800BF5DAD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBE3D99126F6D0A800BF5DAD /* Preview Assets.xcassets */; };
 		CBE3D99D26F6D0A900BF5DAD /* NnttawyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3D99C26F6D0A900BF5DAD /* NnttawyeTests.swift */; };
 		CBE3D9A826F6D0A900BF5DAD /* NnttawyeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3D9A726F6D0A900BF5DAD /* NnttawyeUITests.swift */; };
+		CBE4DE53270544F800271A53 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE4DE52270544F700271A53 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		CBE3D9A326F6D0A900BF5DAD /* NnttawyeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NnttawyeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBE3D9A726F6D0A900BF5DAD /* NnttawyeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NnttawyeUITests.swift; sourceTree = "<group>"; };
 		CBE3D9A926F6D0A900BF5DAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CBE4DE52270544F700271A53 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				CBE3D98A26F6D0A400BF5DAD /* NnttawyeApp.swift */,
+				CBE4DE52270544F700271A53 /* Model.swift */,
 				CBE3D98C26F6D0A400BF5DAD /* ContentView.swift */,
 				CBE3D98E26F6D0A800BF5DAD /* Assets.xcassets */,
 				CBE3D99326F6D0A800BF5DAD /* Info.plist */,
@@ -259,6 +262,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBE4DE53270544F800271A53 /* Model.swift in Sources */,
 				CBE3D98D26F6D0A400BF5DAD /* ContentView.swift in Sources */,
 				CBE3D98B26F6D0A400BF5DAD /* NnttawyeApp.swift in Sources */,
 			);
