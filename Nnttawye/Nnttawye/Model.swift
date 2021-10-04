@@ -42,25 +42,39 @@ class Dish {
     }
 }
 
-var data = [Dish(nameFood : "Milk-chocalate", nameRestaurant : "UMD Dinning Hall", foodType : .drink, restaurantType: .dinningHall
-                        , foodTimePeriod : "bld", energy : 2, taste : 2, price : 0),
-            Dish(nameFood : "Milk-2%milk", nameRestaurant : "UMD Dinning Hall", foodType : .drink, restaurantType: .dinningHall
-                        , foodTimePeriod : "bld", energy : 1, taste : 1, price : 0),
-            Dish(nameFood : "Smoothie", nameRestaurant : "UMD Dinning Hall", foodType : .drink, restaurantType: .dinningHall
-                        , foodTimePeriod : "bld", energy : 1, taste : 3, price : 0),
-            Dish(nameFood : "Chicken", nameRestaurant : "UMD Dinning Hall", foodType : .main, restaurantType: .dinningHall
-                        , foodTimePeriod : "ld", energy : 3, taste : 3, price : 0),
-            Dish(nameFood : "Spagheti", nameRestaurant : "UMD Dinning Hall", foodType : .main, restaurantType: .dinningHall
-                        , foodTimePeriod : "d", energy : 3, taste : 3, price : 0),
-            Dish(nameFood : "Beef", nameRestaurant : "UMD Dinning Hall", foodType : .main, restaurantType:  .dinningHall
-                        , foodTimePeriod : "ld", energy : 3, taste : 2, price : 0),
-            Dish(nameFood : "Noodle", nameRestaurant : "UMD Dinning Hall", foodType : .main, restaurantType:  .dinningHall
-                        , foodTimePeriod : "d", energy : 2, taste : 2, price : 0),
-            Dish(nameFood : "Coffee-Americano", nameRestaurant : "Vigilante", foodType : .drink, restaurantType: .foodShop
-                        , foodTimePeriod : "bld", energy : 3, taste : 1, price : 7),
-            Dish(nameFood : "Coffee-Lattie", nameRestaurant : "Vigilante", foodType : .drink, restaurantType: .foodShop
-                        , foodTimePeriod : "bld", energy : 3, taste : 2, price : 7),
-            Dish(nameFood : "HotHonneyChickenPlate", nameRestaurant : "SweetGreen", foodType : .main, restaurantType: .foodShop
-                        , foodTimePeriod : "ld", energy : 2, taste : 2, price : 13),
-]
+class UserDemands {
+    var energyDemand: Int = 0
+    var tasteDemand: Int = 0
+    var priceDemand: Float = 0
+    var restaurantFreq: Int = 0
+    var dishFreq: Int = 0
+    var mealTypeDemand: [FoodType] = []
+}
+
+class Algorithms {
+    // Core algorithm to calculate people's meal schedule
+    static func calculateMeals(mealDatabase: [Dish], userDemands: UserDemands) -> [[Dish]] {
+        var mealSchedule: [[Dish]] = Array(repeating: Array(repeating: Dish(), count: 3), count: 7)
+        var energyCurrent = 0
+        var tasteCurrent = 0
+
+        for i in 0..<7 {
+            for j in 0..<3 {
+                for k in 0..<mealDatabase.count {
+                    if energyCurrent < userDemands.energyDemand {
+                        mealSchedule[i][j].append(mealDatabase[k])
+                        energyCurrent += 1
+                    } else if tasteCurrent < userDemands.tasteDemand {
+                        mealSchedule[i][j].append(mealDatabase[k])
+                        tasteCurrent += 1
+                    }
+                }
+            }
+        }
+        
+        return mealSchedule
+    }
+    
+    
+}
 
