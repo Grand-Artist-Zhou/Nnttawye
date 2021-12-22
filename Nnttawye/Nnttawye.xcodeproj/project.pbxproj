@@ -3,68 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CBE3D98B26F6D0A400BF5DAD /* NnttawyeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3D98A26F6D0A400BF5DAD /* NnttawyeApp.swift */; };
-		CBE3D98D26F6D0A400BF5DAD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3D98C26F6D0A400BF5DAD /* ContentView.swift */; };
-		CBE3D98F26F6D0A800BF5DAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBE3D98E26F6D0A800BF5DAD /* Assets.xcassets */; };
-		CBE3D99226F6D0A800BF5DAD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBE3D99126F6D0A800BF5DAD /* Preview Assets.xcassets */; };
-		CBE3D99D26F6D0A900BF5DAD /* NnttawyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3D99C26F6D0A900BF5DAD /* NnttawyeTests.swift */; };
-		CBE3D9A826F6D0A900BF5DAD /* NnttawyeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE3D9A726F6D0A900BF5DAD /* NnttawyeUITests.swift */; };
-		CBE4DE53270544F800271A53 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE4DE52270544F700271A53 /* Model.swift */; };
+		CB139D6B277291CB000FD249 /* NnttawyeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D6A277291CB000FD249 /* NnttawyeApp.swift */; };
+		CB139D6D277291CB000FD249 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D6C277291CB000FD249 /* ContentView.swift */; };
+		CB139D6F277291CB000FD249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB139D6E277291CB000FD249 /* Assets.xcassets */; };
+		CB139D72277291CB000FD249 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB139D71277291CB000FD249 /* Preview Assets.xcassets */; };
+		CB139D74277291CB000FD249 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D73277291CB000FD249 /* Persistence.swift */; };
+		CB139D77277291CB000FD249 /* Nnttawye.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CB139D75277291CB000FD249 /* Nnttawye.xcdatamodeld */; };
+		CB139D7E2772923D000FD249 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D7D2772923D000FD249 /* Test.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		CBE3D99926F6D0A900BF5DAD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBE3D97F26F6D0A400BF5DAD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CBE3D98626F6D0A400BF5DAD;
-			remoteInfo = Nnttawye;
-		};
-		CBE3D9A426F6D0A900BF5DAD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBE3D97F26F6D0A400BF5DAD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CBE3D98626F6D0A400BF5DAD;
-			remoteInfo = Nnttawye;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		CBE3D98726F6D0A400BF5DAD /* Nnttawye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nnttawye.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBE3D98A26F6D0A400BF5DAD /* NnttawyeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NnttawyeApp.swift; sourceTree = "<group>"; };
-		CBE3D98C26F6D0A400BF5DAD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		CBE3D98E26F6D0A800BF5DAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CBE3D99126F6D0A800BF5DAD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		CBE3D99326F6D0A800BF5DAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CBE3D99826F6D0A900BF5DAD /* NnttawyeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NnttawyeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBE3D99C26F6D0A900BF5DAD /* NnttawyeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NnttawyeTests.swift; sourceTree = "<group>"; };
-		CBE3D99E26F6D0A900BF5DAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CBE3D9A326F6D0A900BF5DAD /* NnttawyeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NnttawyeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBE3D9A726F6D0A900BF5DAD /* NnttawyeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NnttawyeUITests.swift; sourceTree = "<group>"; };
-		CBE3D9A926F6D0A900BF5DAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CBE4DE52270544F700271A53 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		CB139D67277291CB000FD249 /* Nnttawye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nnttawye.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB139D6A277291CB000FD249 /* NnttawyeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NnttawyeApp.swift; sourceTree = "<group>"; };
+		CB139D6C277291CB000FD249 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CB139D6E277291CB000FD249 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CB139D71277291CB000FD249 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CB139D73277291CB000FD249 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		CB139D76277291CB000FD249 /* Nnttawye.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nnttawye.xcdatamodel; sourceTree = "<group>"; };
+		CB139D7D2772923D000FD249 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CBE3D98426F6D0A400BF5DAD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CBE3D99526F6D0A900BF5DAD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CBE3D9A026F6D0A900BF5DAD /* Frameworks */ = {
+		CB139D64277291CA000FD249 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -74,75 +38,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CBE3D97E26F6D0A400BF5DAD = {
+		CB139D5E277291CA000FD249 = {
 			isa = PBXGroup;
 			children = (
-				CBE3D98926F6D0A400BF5DAD /* Nnttawye */,
-				CBE3D99B26F6D0A900BF5DAD /* NnttawyeTests */,
-				CBE3D9A626F6D0A900BF5DAD /* NnttawyeUITests */,
-				CBE3D98826F6D0A400BF5DAD /* Products */,
+				CB139D69277291CB000FD249 /* Nnttawye */,
+				CB139D68277291CB000FD249 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		CBE3D98826F6D0A400BF5DAD /* Products */ = {
+		CB139D68277291CB000FD249 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CBE3D98726F6D0A400BF5DAD /* Nnttawye.app */,
-				CBE3D99826F6D0A900BF5DAD /* NnttawyeTests.xctest */,
-				CBE3D9A326F6D0A900BF5DAD /* NnttawyeUITests.xctest */,
+				CB139D67277291CB000FD249 /* Nnttawye.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CBE3D98926F6D0A400BF5DAD /* Nnttawye */ = {
+		CB139D69277291CB000FD249 /* Nnttawye */ = {
 			isa = PBXGroup;
 			children = (
-				CBE3D98A26F6D0A400BF5DAD /* NnttawyeApp.swift */,
-				CBE4DE52270544F700271A53 /* Model.swift */,
-				CBE3D98C26F6D0A400BF5DAD /* ContentView.swift */,
-				CBE3D98E26F6D0A800BF5DAD /* Assets.xcassets */,
-				CBE3D99326F6D0A800BF5DAD /* Info.plist */,
-				CBE3D99026F6D0A800BF5DAD /* Preview Content */,
+				CB139D6A277291CB000FD249 /* NnttawyeApp.swift */,
+				CB139D6C277291CB000FD249 /* ContentView.swift */,
+				CB139D7D2772923D000FD249 /* Test.swift */,
+				CB139D6E277291CB000FD249 /* Assets.xcassets */,
+				CB139D73277291CB000FD249 /* Persistence.swift */,
+				CB139D75277291CB000FD249 /* Nnttawye.xcdatamodeld */,
+				CB139D70277291CB000FD249 /* Preview Content */,
 			);
 			path = Nnttawye;
 			sourceTree = "<group>";
 		};
-		CBE3D99026F6D0A800BF5DAD /* Preview Content */ = {
+		CB139D70277291CB000FD249 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				CBE3D99126F6D0A800BF5DAD /* Preview Assets.xcassets */,
+				CB139D71277291CB000FD249 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		CBE3D99B26F6D0A900BF5DAD /* NnttawyeTests */ = {
-			isa = PBXGroup;
-			children = (
-				CBE3D99C26F6D0A900BF5DAD /* NnttawyeTests.swift */,
-				CBE3D99E26F6D0A900BF5DAD /* Info.plist */,
-			);
-			path = NnttawyeTests;
-			sourceTree = "<group>";
-		};
-		CBE3D9A626F6D0A900BF5DAD /* NnttawyeUITests */ = {
-			isa = PBXGroup;
-			children = (
-				CBE3D9A726F6D0A900BF5DAD /* NnttawyeUITests.swift */,
-				CBE3D9A926F6D0A900BF5DAD /* Info.plist */,
-			);
-			path = NnttawyeUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CBE3D98626F6D0A400BF5DAD /* Nnttawye */ = {
+		CB139D66277291CA000FD249 /* Nnttawye */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CBE3D9AC26F6D0A900BF5DAD /* Build configuration list for PBXNativeTarget "Nnttawye" */;
+			buildConfigurationList = CB139D7A277291CB000FD249 /* Build configuration list for PBXNativeTarget "Nnttawye" */;
 			buildPhases = (
-				CBE3D98326F6D0A400BF5DAD /* Sources */,
-				CBE3D98426F6D0A400BF5DAD /* Frameworks */,
-				CBE3D98526F6D0A400BF5DAD /* Resources */,
+				CB139D63277291CA000FD249 /* Sources */,
+				CB139D64277291CA000FD249 /* Frameworks */,
+				CB139D65277291CA000FD249 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -150,163 +93,77 @@
 			);
 			name = Nnttawye;
 			productName = Nnttawye;
-			productReference = CBE3D98726F6D0A400BF5DAD /* Nnttawye.app */;
+			productReference = CB139D67277291CB000FD249 /* Nnttawye.app */;
 			productType = "com.apple.product-type.application";
-		};
-		CBE3D99726F6D0A900BF5DAD /* NnttawyeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CBE3D9AF26F6D0A900BF5DAD /* Build configuration list for PBXNativeTarget "NnttawyeTests" */;
-			buildPhases = (
-				CBE3D99426F6D0A900BF5DAD /* Sources */,
-				CBE3D99526F6D0A900BF5DAD /* Frameworks */,
-				CBE3D99626F6D0A900BF5DAD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CBE3D99A26F6D0A900BF5DAD /* PBXTargetDependency */,
-			);
-			name = NnttawyeTests;
-			productName = NnttawyeTests;
-			productReference = CBE3D99826F6D0A900BF5DAD /* NnttawyeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		CBE3D9A226F6D0A900BF5DAD /* NnttawyeUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CBE3D9B226F6D0A900BF5DAD /* Build configuration list for PBXNativeTarget "NnttawyeUITests" */;
-			buildPhases = (
-				CBE3D99F26F6D0A900BF5DAD /* Sources */,
-				CBE3D9A026F6D0A900BF5DAD /* Frameworks */,
-				CBE3D9A126F6D0A900BF5DAD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CBE3D9A526F6D0A900BF5DAD /* PBXTargetDependency */,
-			);
-			name = NnttawyeUITests;
-			productName = NnttawyeUITests;
-			productReference = CBE3D9A326F6D0A900BF5DAD /* NnttawyeUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		CBE3D97F26F6D0A400BF5DAD /* Project object */ = {
+		CB139D5F277291CA000FD249 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
-				LastUpgradeCheck = 1250;
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
 				TargetAttributes = {
-					CBE3D98626F6D0A400BF5DAD = {
-						CreatedOnToolsVersion = 12.5.1;
-					};
-					CBE3D99726F6D0A900BF5DAD = {
-						CreatedOnToolsVersion = 12.5.1;
-						TestTargetID = CBE3D98626F6D0A400BF5DAD;
-					};
-					CBE3D9A226F6D0A900BF5DAD = {
-						CreatedOnToolsVersion = 12.5.1;
-						TestTargetID = CBE3D98626F6D0A400BF5DAD;
+					CB139D66277291CA000FD249 = {
+						CreatedOnToolsVersion = 13.2.1;
 					};
 				};
 			};
-			buildConfigurationList = CBE3D98226F6D0A400BF5DAD /* Build configuration list for PBXProject "Nnttawye" */;
-			compatibilityVersion = "Xcode 9.3";
+			buildConfigurationList = CB139D62277291CA000FD249 /* Build configuration list for PBXProject "Nnttawye" */;
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = CBE3D97E26F6D0A400BF5DAD;
-			productRefGroup = CBE3D98826F6D0A400BF5DAD /* Products */;
+			mainGroup = CB139D5E277291CA000FD249;
+			productRefGroup = CB139D68277291CB000FD249 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CBE3D98626F6D0A400BF5DAD /* Nnttawye */,
-				CBE3D99726F6D0A900BF5DAD /* NnttawyeTests */,
-				CBE3D9A226F6D0A900BF5DAD /* NnttawyeUITests */,
+				CB139D66277291CA000FD249 /* Nnttawye */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CBE3D98526F6D0A400BF5DAD /* Resources */ = {
+		CB139D65277291CA000FD249 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBE3D99226F6D0A800BF5DAD /* Preview Assets.xcassets in Resources */,
-				CBE3D98F26F6D0A800BF5DAD /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CBE3D99626F6D0A900BF5DAD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CBE3D9A126F6D0A900BF5DAD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				CB139D72277291CB000FD249 /* Preview Assets.xcassets in Resources */,
+				CB139D6F277291CB000FD249 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CBE3D98326F6D0A400BF5DAD /* Sources */ = {
+		CB139D63277291CA000FD249 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBE4DE53270544F800271A53 /* Model.swift in Sources */,
-				CBE3D98D26F6D0A400BF5DAD /* ContentView.swift in Sources */,
-				CBE3D98B26F6D0A400BF5DAD /* NnttawyeApp.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CBE3D99426F6D0A900BF5DAD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CBE3D99D26F6D0A900BF5DAD /* NnttawyeTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CBE3D99F26F6D0A900BF5DAD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CBE3D9A826F6D0A900BF5DAD /* NnttawyeUITests.swift in Sources */,
+				CB139D74277291CB000FD249 /* Persistence.swift in Sources */,
+				CB139D6D277291CB000FD249 /* ContentView.swift in Sources */,
+				CB139D7E2772923D000FD249 /* Test.swift in Sources */,
+				CB139D6B277291CB000FD249 /* NnttawyeApp.swift in Sources */,
+				CB139D77277291CB000FD249 /* Nnttawye.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		CBE3D99A26F6D0A900BF5DAD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CBE3D98626F6D0A400BF5DAD /* Nnttawye */;
-			targetProxy = CBE3D99926F6D0A900BF5DAD /* PBXContainerItemProxy */;
-		};
-		CBE3D9A526F6D0A900BF5DAD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CBE3D98626F6D0A400BF5DAD /* Nnttawye */;
-			targetProxy = CBE3D9A426F6D0A900BF5DAD /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		CBE3D9AA26F6D0A900BF5DAD /* Debug */ = {
+		CB139D78277291CB000FD249 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -351,7 +208,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -361,13 +218,13 @@
 			};
 			name = Debug;
 		};
-		CBE3D9AB26F6D0A900BF5DAD /* Release */ = {
+		CB139D79277291CB000FD249 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -406,7 +263,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -416,174 +273,99 @@
 			};
 			name = Release;
 		};
-		CBE3D9AD26F6D0A900BF5DAD /* Debug */ = {
+		CB139D7B277291CB000FD249 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nnttawye/Preview Content\"";
 				DEVELOPMENT_TEAM = F5U46GHZC6;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Nnttawye/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yizhou-Li.Nnttawye";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yl.Nnttawye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		CBE3D9AE26F6D0A900BF5DAD /* Release */ = {
+		CB139D7C277291CB000FD249 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Nnttawye/Preview Content\"";
 				DEVELOPMENT_TEAM = F5U46GHZC6;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Nnttawye/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yizhou-Li.Nnttawye";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yl.Nnttawye;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		CBE3D9B026F6D0A900BF5DAD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F5U46GHZC6;
-				INFOPLIST_FILE = NnttawyeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yizhou-Li.NnttawyeTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nnttawye.app/Nnttawye";
-			};
-			name = Debug;
-		};
-		CBE3D9B126F6D0A900BF5DAD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F5U46GHZC6;
-				INFOPLIST_FILE = NnttawyeTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yizhou-Li.NnttawyeTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Nnttawye.app/Nnttawye";
-			};
-			name = Release;
-		};
-		CBE3D9B326F6D0A900BF5DAD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F5U46GHZC6;
-				INFOPLIST_FILE = NnttawyeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yizhou-Li.NnttawyeUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Nnttawye;
-			};
-			name = Debug;
-		};
-		CBE3D9B426F6D0A900BF5DAD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F5U46GHZC6;
-				INFOPLIST_FILE = NnttawyeUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Yizhou-Li.NnttawyeUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Nnttawye;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CBE3D98226F6D0A400BF5DAD /* Build configuration list for PBXProject "Nnttawye" */ = {
+		CB139D62277291CA000FD249 /* Build configuration list for PBXProject "Nnttawye" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CBE3D9AA26F6D0A900BF5DAD /* Debug */,
-				CBE3D9AB26F6D0A900BF5DAD /* Release */,
+				CB139D78277291CB000FD249 /* Debug */,
+				CB139D79277291CB000FD249 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CBE3D9AC26F6D0A900BF5DAD /* Build configuration list for PBXNativeTarget "Nnttawye" */ = {
+		CB139D7A277291CB000FD249 /* Build configuration list for PBXNativeTarget "Nnttawye" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CBE3D9AD26F6D0A900BF5DAD /* Debug */,
-				CBE3D9AE26F6D0A900BF5DAD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CBE3D9AF26F6D0A900BF5DAD /* Build configuration list for PBXNativeTarget "NnttawyeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CBE3D9B026F6D0A900BF5DAD /* Debug */,
-				CBE3D9B126F6D0A900BF5DAD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CBE3D9B226F6D0A900BF5DAD /* Build configuration list for PBXNativeTarget "NnttawyeUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CBE3D9B326F6D0A900BF5DAD /* Debug */,
-				CBE3D9B426F6D0A900BF5DAD /* Release */,
+				CB139D7B277291CB000FD249 /* Debug */,
+				CB139D7C277291CB000FD249 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CB139D75277291CB000FD249 /* Nnttawye.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CB139D76277291CB000FD249 /* Nnttawye.xcdatamodel */,
+			);
+			currentVersion = CB139D76277291CB000FD249 /* Nnttawye.xcdatamodel */;
+			path = Nnttawye.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
-	rootObject = CBE3D97F26F6D0A400BF5DAD /* Project object */;
+	rootObject = CB139D5F277291CA000FD249 /* Project object */;
 }
