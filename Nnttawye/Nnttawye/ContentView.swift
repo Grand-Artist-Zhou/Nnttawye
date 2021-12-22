@@ -9,11 +9,17 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @State private var showScanner = true
+    
     var body: some View {
         VStack {
-            AddingView()
-            Text("Summary")
-            Text("Settings")
+//            AddingView()
+            Text("Scan")
+            .sheet(isPresented: $showScanner, content: {
+                ScannerView(didCancelScanning: {}, didFinishScanning: {result in })
+            })
+//            Text("Summary")
+//            Text("Settings")
         }
     }
 }
