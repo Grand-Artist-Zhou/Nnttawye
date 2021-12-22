@@ -13,7 +13,10 @@
 		CB139D72277291CB000FD249 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB139D71277291CB000FD249 /* Preview Assets.xcassets */; };
 		CB139D74277291CB000FD249 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D73277291CB000FD249 /* Persistence.swift */; };
 		CB139D77277291CB000FD249 /* Nnttawye.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CB139D75277291CB000FD249 /* Nnttawye.xcdatamodeld */; };
-		CB139D7E2772923D000FD249 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D7D2772923D000FD249 /* Test.swift */; };
+		CB139D7E2772923D000FD249 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D7D2772923D000FD249 /* ScannerView.swift */; };
+		CB139D812773AA38000FD249 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D802773AA38000FD249 /* Model.swift */; };
+		CB139D832773ACC3000FD249 /* TextRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D822773ACC3000FD249 /* TextRecognition.swift */; };
+		CB139D852773BE85000FD249 /* TextPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D842773BE85000FD249 /* TextPreviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +27,11 @@
 		CB139D71277291CB000FD249 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CB139D73277291CB000FD249 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		CB139D76277291CB000FD249 /* Nnttawye.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Nnttawye.xcdatamodel; sourceTree = "<group>"; };
-		CB139D7D2772923D000FD249 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		CB139D7D2772923D000FD249 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		CB139D7F2773A705000FD249 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CB139D802773AA38000FD249 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		CB139D822773ACC3000FD249 /* TextRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognition.swift; sourceTree = "<group>"; };
+		CB139D842773BE85000FD249 /* TextPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPreviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +67,10 @@
 				CB139D7F2773A705000FD249 /* Info.plist */,
 				CB139D6A277291CB000FD249 /* NnttawyeApp.swift */,
 				CB139D6C277291CB000FD249 /* ContentView.swift */,
-				CB139D7D2772923D000FD249 /* Test.swift */,
+				CB139D822773ACC3000FD249 /* TextRecognition.swift */,
+				CB139D802773AA38000FD249 /* Model.swift */,
+				CB139D7D2772923D000FD249 /* ScannerView.swift */,
+				CB139D842773BE85000FD249 /* TextPreviewView.swift */,
 				CB139D6E277291CB000FD249 /* Assets.xcassets */,
 				CB139D73277291CB000FD249 /* Persistence.swift */,
 				CB139D75277291CB000FD249 /* Nnttawye.xcdatamodeld */,
@@ -149,8 +158,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB139D74277291CB000FD249 /* Persistence.swift in Sources */,
+				CB139D832773ACC3000FD249 /* TextRecognition.swift in Sources */,
+				CB139D852773BE85000FD249 /* TextPreviewView.swift in Sources */,
 				CB139D6D277291CB000FD249 /* ContentView.swift in Sources */,
-				CB139D7E2772923D000FD249 /* Test.swift in Sources */,
+				CB139D7E2772923D000FD249 /* ScannerView.swift in Sources */,
+				CB139D812773AA38000FD249 /* Model.swift in Sources */,
 				CB139D6B277291CB000FD249 /* NnttawyeApp.swift in Sources */,
 				CB139D77277291CB000FD249 /* Nnttawye.xcdatamodeld in Sources */,
 			);
