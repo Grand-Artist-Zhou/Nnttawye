@@ -16,7 +16,10 @@ class TextItem: Identifiable {
     }
 }
 
-
 class RecognizedContent: ObservableObject {
     @Published var items = [TextItem]()
+    @Published var calories: Float = 0
+    @Published var fat: Float = 0
+    @Published var carbohydrate: Float = 0
+    @Published var sodium: Float = 0
 }

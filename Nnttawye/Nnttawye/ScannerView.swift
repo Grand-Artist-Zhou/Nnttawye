@@ -8,9 +8,6 @@
 import SwiftUI
 import VisionKit
 
-import SwiftUI
-import VisionKit
-
 struct ScannerView: UIViewControllerRepresentable {
     var didFinishScanning: ((_ result: Result<[UIImage], Error>) -> Void)
     var didCancelScanning: () -> Void
