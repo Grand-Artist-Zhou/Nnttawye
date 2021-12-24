@@ -33,15 +33,11 @@ struct ScannerView: UIViewControllerRepresentable {
             self.scannerView = scannerView
         }
         
-        
-        // MARK: - VNDocumentCameraViewControllerDelegate
-        
         func documentCameraViewController(_ controller: VNDocumentCameraViewController, didFinishWith scan: VNDocumentCameraScan) {
             var scannedPages = [UIImage]()
-            
-            for i in 0..<scan.pageCount {
-                scannedPages.append(scan.imageOfPage(at: i))
-            }
+   
+            // We only pick the first image scanned.
+            scannedPages.append(scan.imageOfPage(at: 0))
             
             scannerView.didFinishScanning(.success(scannedPages))
         }
