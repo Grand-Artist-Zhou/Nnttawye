@@ -8,18 +8,16 @@
 import Foundation
 
 class TextItem: Identifiable {
-    var id: String
-    var text: String = ""
-    
-    init() {
-        id = UUID().uuidString
-    }
+    var id: String = UUID().uuidString
+    var calories: String = ""
+    var fat: String = ""
+    var carbohydrate: String = ""
+    var sodium: String = ""
 }
 
 class RecognizedContent: ObservableObject {
-    @Published var items = [TextItem]()
-    @Published var calories: Float = 0
-    @Published var fat: Float = 0
-    @Published var carbohydrate: Float = 0
-    @Published var sodium: Float = 0
+    @Published var calories: String = ""
+    @Published var fat: String = ""
+    @Published var carbohydrate: String = ""
+    @Published var sodium: String = ""
 }

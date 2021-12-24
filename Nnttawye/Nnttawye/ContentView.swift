@@ -18,7 +18,7 @@ struct ContentView: View {
                     Text("Adding")
                 }
                 NavigationLink {
-                    Text("hi")
+                    Text("Under construction...")
                 } label: {
                     Text("Summary")
                 }
@@ -66,19 +66,19 @@ struct AddingView: View {
             }
             HStack {
                 Text("Calories")
-                TextField("", text: $calories)
+                TextField("", text: $recognizedContent.calories)
             }
             HStack {
                 Text("Fat")
-                TextField("", text: $fat)
+                TextField("", text: $recognizedContent.fat)
             }
             HStack {
                 Text("Sodium")
-                TextField("", text: $sodium)
+                TextField("", text: $recognizedContent.sodium)
             }
             HStack {
                 Text("Carbohydrate")
-                TextField("", text: $carbohydrate)
+                TextField("", text: $recognizedContent.carbohydrate)
             }
         }
         .navigationBarItems(trailing: Button(action: {

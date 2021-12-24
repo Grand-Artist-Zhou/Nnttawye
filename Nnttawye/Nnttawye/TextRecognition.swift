@@ -14,8 +14,7 @@ struct TextRecognition {
     var didFinishRecognition: () -> Void
     
     func recognizeText() {
-        let queue = DispatchQueue(label: "textRecognitionQueue", qos: .userInitiated)
-        queue.async {
+        DispatchQueue(label: "textRecognitionQueue", qos: .userInitiated).async {
             for image in scannedImages {
                 guard let cgImage = image.cgImage else { return }
                 
@@ -26,7 +25,10 @@ struct TextRecognition {
                     try requestHandler.perform([getTextRecognitionRequest(with: textItem)])
                     
                     DispatchQueue.main.async {
-                        recognizedContent.items.append(textItem)
+                        recognizedContent.carbohydrate = textItem.carbohydrate
+                        recognizedContent.calories = textItem.calories
+                        recognizedContent.fat = textItem.fat
+                        recognizedContent.sodium = textItem.sodium
                     }
                 } catch {
                     print(error.localizedDescription)
@@ -61,10 +63,10 @@ struct TextRecognition {
                 func extractVal() -> Float? {
                     let str = recognizedText.string
                     let strArr = str.split(separator: " ")
-
+                    
                     for item in strArr {
                         let part = item.components(separatedBy: CharacterSet.init(charactersIn: "0123456789.").inverted).joined()
-
+                        
                         if let val = Float(part) {
                             return val
                         }
@@ -74,13 +76,16 @@ struct TextRecognition {
                 }
                 
                 if useRegex(pattern: "Carbohydrate [0-9]+"), let val = extractVal() {
-                    print(val)
-                } else if useRegex(pattern: "Calories [0-9]+"), let val = extractVal() {
-                    
-                } else if useRegex(pattern: "Fat [0-9]+"), let val = extractVal() {
-                    
-                } else if useRegex(pattern: "Sodium [0-9]+"), let val = extractVal() {
-                   
+                    textItem.carbohydrate = String(val)
+                }
+                if useRegex(pattern: "Calories [0-9]+"), let val = extractVal() {
+                    textItem.calories = String(val)
+                }
+                if useRegex(pattern: "Fat [0-9]+"), let val = extractVal() {
+                    textItem.fat = String(val)
+                }
+                if useRegex(pattern: "Sodium [0-9]+"), let val = extractVal() {
+                    textItem.sodium = String(val)
                 }
             }
         }
