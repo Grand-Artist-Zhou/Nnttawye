@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CB139D6B277291CB000FD249 /* NnttawyeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D6A277291CB000FD249 /* NnttawyeApp.swift */; };
-		CB139D6D277291CB000FD249 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D6C277291CB000FD249 /* ContentView.swift */; };
 		CB139D6F277291CB000FD249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB139D6E277291CB000FD249 /* Assets.xcassets */; };
 		CB139D72277291CB000FD249 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB139D71277291CB000FD249 /* Preview Assets.xcassets */; };
 		CB139D74277291CB000FD249 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D73277291CB000FD249 /* Persistence.swift */; };
@@ -17,12 +16,17 @@
 		CB139D812773AA38000FD249 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D802773AA38000FD249 /* Model.swift */; };
 		CB139D832773ACC3000FD249 /* TextRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D822773ACC3000FD249 /* TextRecognition.swift */; };
 		CB139D852773BE85000FD249 /* TextPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D842773BE85000FD249 /* TextPreviewView.swift */; };
+		CB139D9627762F9F000FD249 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D9227762F9F000FD249 /* Food+CoreDataClass.swift */; };
+		CB139D9727762F9F000FD249 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D9327762F9F000FD249 /* Food+CoreDataProperties.swift */; };
+		CB139D9827762F9F000FD249 /* Restaurant+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D9427762F9F000FD249 /* Restaurant+CoreDataClass.swift */; };
+		CB139D9927762F9F000FD249 /* Restaurant+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D9527762F9F000FD249 /* Restaurant+CoreDataProperties.swift */; };
+		CB139D9A27765B0E000FD249 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D6C277291CB000FD249 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CB139D67277291CB000FD249 /* Nnttawye.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nnttawye.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB139D6A277291CB000FD249 /* NnttawyeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NnttawyeApp.swift; sourceTree = "<group>"; };
-		CB139D6C277291CB000FD249 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CB139D6C277291CB000FD249 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		CB139D6E277291CB000FD249 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB139D71277291CB000FD249 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CB139D73277291CB000FD249 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -32,6 +36,10 @@
 		CB139D802773AA38000FD249 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		CB139D822773ACC3000FD249 /* TextRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognition.swift; sourceTree = "<group>"; };
 		CB139D842773BE85000FD249 /* TextPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextPreviewView.swift; sourceTree = "<group>"; };
+		CB139D9227762F9F000FD249 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Food+CoreDataClass.swift"; path = "Nnttawye/Food+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CB139D9327762F9F000FD249 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Food+CoreDataProperties.swift"; path = "Nnttawye/Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		CB139D9427762F9F000FD249 /* Restaurant+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Restaurant+CoreDataClass.swift"; path = "Nnttawye/Restaurant+CoreDataClass.swift"; sourceTree = "<group>"; };
+		CB139D9527762F9F000FD249 /* Restaurant+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Restaurant+CoreDataProperties.swift"; path = "Nnttawye/Restaurant+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +56,10 @@
 		CB139D5E277291CA000FD249 = {
 			isa = PBXGroup;
 			children = (
+				CB139D9227762F9F000FD249 /* Food+CoreDataClass.swift */,
+				CB139D9327762F9F000FD249 /* Food+CoreDataProperties.swift */,
+				CB139D9427762F9F000FD249 /* Restaurant+CoreDataClass.swift */,
+				CB139D9527762F9F000FD249 /* Restaurant+CoreDataProperties.swift */,
 				CB139D69277291CB000FD249 /* Nnttawye */,
 				CB139D68277291CB000FD249 /* Products */,
 			);
@@ -157,12 +169,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB139D9827762F9F000FD249 /* Restaurant+CoreDataClass.swift in Sources */,
 				CB139D74277291CB000FD249 /* Persistence.swift in Sources */,
+				CB139D9A27765B0E000FD249 /* ContentView.swift in Sources */,
 				CB139D832773ACC3000FD249 /* TextRecognition.swift in Sources */,
 				CB139D852773BE85000FD249 /* TextPreviewView.swift in Sources */,
-				CB139D6D277291CB000FD249 /* ContentView.swift in Sources */,
 				CB139D7E2772923D000FD249 /* ScannerView.swift in Sources */,
+				CB139D9927762F9F000FD249 /* Restaurant+CoreDataProperties.swift in Sources */,
+				CB139D9727762F9F000FD249 /* Food+CoreDataProperties.swift in Sources */,
 				CB139D812773AA38000FD249 /* Model.swift in Sources */,
+				CB139D9627762F9F000FD249 /* Food+CoreDataClass.swift in Sources */,
 				CB139D6B277291CB000FD249 /* NnttawyeApp.swift in Sources */,
 				CB139D77277291CB000FD249 /* Nnttawye.xcdatamodeld in Sources */,
 			);

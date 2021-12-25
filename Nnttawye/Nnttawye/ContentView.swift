@@ -16,18 +16,56 @@ struct ContentView: View {
                     AddingView()
                 } label: {
                     Text("Adding")
-                }
+                }.padding()
+                                
                 NavigationLink {
-                    Text("Under construction...")
+                    TestView()
                 } label: {
-                    Text("Summary")
+                    Text("Test")
                 }
             }
         }
     }
 }
 
+struct TestView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Restaurant.name, ascending: true)], animation: .default)
+    private var rsts: FetchedResults<Restaurant>
+    
+    private func deleteItems(offsets: IndexSet) {
+            offsets.map { rsts[$0] }.forEach(viewContext.delete)
+            
+            do {
+                try viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
+    }
+    
+    var body: some View {
+        VStack {
+            List {
+                ForEach(rsts) { rst in
+                    Text(rst.name!)
+                }
+                .onDelete(perform: deleteItems)
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    EditButton()
+                }
+            }
+//            Button("Reset") {
+//                deleteItems(offsets: <#T##IndexSet#>)
+//            }
+        }
+    }
+}
+
 struct AddingView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @StateObject var recognizedContent = RecognizedContent()
     @State private var showScanner = false
     @State private var isRecognizing = false
@@ -79,6 +117,21 @@ struct AddingView: View {
             HStack {
                 Text("Carbohydrate")
                 TextField("", text: $recognizedContent.carbohydrate)
+            }
+            Button("Save") {
+                let rst = Restaurant(context: viewContext)
+                rst.name = rstName
+                
+                let fd = Food(context: viewContext)
+                fd.name = fdName
+                
+                rst.addToFoods(fd)
+                do {
+                    try viewContext.save()
+                } catch {
+                    let nsError = error as NSError
+                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                }
             }
         }
         .navigationBarItems(trailing: Button(action: {
