@@ -6,6 +6,15 @@
 //
 
 import Foundation
+import SwiftUI
+
+enum FoodType {
+    case default_, main
+}
+
+enum FoodTime {
+    case default_, morning, noon, night
+}
 
 class TextItem: Identifiable {
     var id: String = UUID().uuidString
@@ -16,14 +25,14 @@ class TextItem: Identifiable {
 }
 
 class RecordModel: ObservableObject {
-    @Published var rstName: String = ""
-    @Published var fdName: String = ""
-    @Published var fdType: String = ""
-    @Published var time: String = ""
-    @Published var cost: String = ""
-
-    @Published var calories: String = ""
-    @Published var fat: String = ""
-    @Published var carbohydrate: String = ""
-    @Published var sodium: String = ""
+    @Published var rstName: String = "None"
+    @Published var fdName: String = "None"
+    @Published var fdType: FoodType = .default_
+    @Published var fdtime: FoodTime = .default_
+    @Published var fdcost: String = "0"
+    
+    @Published var calories: String = "0"
+    @Published var fat: String = "0"
+    @Published var carbohydrate: String = "0"
+    @Published var sodium: String = "0"
 }

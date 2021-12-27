@@ -88,6 +88,9 @@ struct ViewDataView: View {
 struct AddingView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var recordModel: RecordModel
+    
+    @State private var selectedFdType = FoodType.default_
+    @State private var selectedFdTime = FoodTime.default_
     @State private var showScanner = false
     @State private var isRecognizing = false
     
@@ -95,23 +98,29 @@ struct AddingView: View {
         VStack{
             HStack {
                 Text("Restaurant")
-                TextField("name", text: $recordModel.rstName)
+                TextField("", text: $recordModel.rstName)
             }
             HStack {
                 Text("Food")
-                TextField("name", text: $recordModel.fdName)
+                TextField("", text: $recordModel.fdName)
             }
             HStack {
-                Text("Type")
-                TextField("", text: $recordModel.fdType)
+                Text("FoodType")
+                Picker("", selection: $selectedFdType) {
+                    Text("Main").tag(FoodType.main)
+                }
             }
             HStack {
-                Text("Time")
-                TextField("", text: $recordModel.time)
+                Text("FoodTime")
+                Picker("", selection: $selectedFdTime) {
+                    Text("Morning").tag(FoodTime.morning)
+                    Text("Noon").tag(FoodTime.noon)
+                    Text("Night").tag(FoodTime.night)
+                }
             }
             HStack {
                 Text("Cost")
-                TextField("", text: $recordModel.cost)
+                TextField("", text: $recordModel.fdcost)
             }
             HStack {
                 Text("Calories")
@@ -135,6 +144,11 @@ struct AddingView: View {
                 
                 let fd = Food(context: viewContext)
                 fd.name = recordModel.fdName
+                fd.type =
+                fd.time =
+                fd.cost =
+                
+                
                 
                 rst.addToFoods(fd)
                 do {
