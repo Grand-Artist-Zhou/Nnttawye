@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-enum FoodType {
+@objc public enum FoodType: Int {
     case default_, main
 }
 
-enum FoodTime {
+@objc public enum FoodTime: Int {
     case default_, morning, noon, night
 }
 

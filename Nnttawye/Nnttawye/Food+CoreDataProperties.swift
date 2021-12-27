@@ -16,9 +16,9 @@ extension Food {
         return NSFetchRequest<Food>(entityName: "Food")
     }
     
-    @NSManaged public var name: String?
-    @NSManaged public var type: String?
-    @NSManaged public var time: String?
+    @NSManaged public var name: String
+    @NSManaged public var type: FoodType
+    @NSManaged public var time: FoodTime
     @NSManaged public var cost: Float
 
     @NSManaged public var fat: Float

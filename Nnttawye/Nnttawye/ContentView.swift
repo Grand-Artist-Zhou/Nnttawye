@@ -41,7 +41,7 @@ struct PredictionView: View {
     var body: some View {
         List {
             ForEach(fds) { fd in
-                Text(fd.name!)
+                Text(fd.name)
             }
         }
     }
@@ -144,11 +144,14 @@ struct AddingView: View {
                 
                 let fd = Food(context: viewContext)
                 fd.name = recordModel.fdName
-                fd.type =
-                fd.time =
-                fd.cost =
+                fd.type = recordModel.fdType
+                fd.time = recordModel.fdtime
+                fd.cost = Float(recordModel.fdcost) ?? 0
                 
-                
+                fd.calories = Float(recordModel.calories) ?? 0
+                fd.fat = Float(recordModel.fat) ?? 0
+                fd.sodium = Float(recordModel.sodium) ?? 0
+                fd.carbohydrate = Float(recordModel.carbohydrate) ?? 0
                 
                 rst.addToFoods(fd)
                 do {
