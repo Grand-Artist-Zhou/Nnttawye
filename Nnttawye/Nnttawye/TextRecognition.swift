@@ -10,7 +10,7 @@ import Vision
 
 struct TextRecognition {
     var scannedImages: [UIImage]
-    @ObservedObject var recognizedContent: RecognizedContent
+    @EnvironmentObject var recordModel: RecordModel
     var didFinishRecognition: () -> Void
     
     func recognizeText() {
@@ -25,10 +25,10 @@ struct TextRecognition {
                     try requestHandler.perform([getTextRecognitionRequest(with: textItem)])
                     
                     DispatchQueue.main.async {
-                        recognizedContent.carbohydrate = textItem.carbohydrate
-                        recognizedContent.calories = textItem.calories
-                        recognizedContent.fat = textItem.fat
-                        recognizedContent.sodium = textItem.sodium
+                        recordModel.carbohydrate = textItem.carbohydrate
+                        recordModel.calories = textItem.calories
+                        recordModel.fat = textItem.fat
+                        recordModel.sodium = textItem.sodium
                     }
                 } catch {
                     print(error.localizedDescription)

@@ -15,20 +15,39 @@ struct ContentView: View {
                 NavigationLink {
                     AddingView()
                 } label: {
-                    Text("Adding")
+                    Text("AddData")
                 }.padding()
                                 
                 NavigationLink {
-                    TestView()
+                    ViewDataView()
                 } label: {
-                    Text("Test")
-                }
+                    Text("ViewData")
+                }.padding()
+                
+                NavigationLink {
+                    PredictionView()
+                } label: {
+                    Text("Predict")
+                }.padding()
             }
         }
     }
 }
 
-struct TestView: View {
+struct PredictionView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Food.name, ascending: true)], predicate: NSPredicate(format: "time == %@", "Morning"), animation: .default) private var fds: FetchedResults<Food> //TODO: predicate problems
+
+    var body: some View {
+        List {
+            ForEach(fds) { fd in
+                Text(fd.name!)
+            }
+        }
+    }
+}
+
+struct ViewDataView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Restaurant.name, ascending: true)], animation: .default)
     private var rsts: FetchedResults<Restaurant>
@@ -48,7 +67,9 @@ struct TestView: View {
         VStack {
             List {
                 ForEach(rsts) { rst in
-                    Text(rst.name!)
+                    Text("Restaurant: \(rst.name!)")
+                    Text("Food: \(rst.foods!)")
+                    Text("Time: \(rst.foods!.description)")
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -57,73 +78,63 @@ struct TestView: View {
                     EditButton()
                 }
             }
-//            Button("Reset") {
-//                deleteItems(offsets: <#T##IndexSet#>)
-//            }
+            Button("Delete all") {
+
+            }
         }
     }
 }
 
 struct AddingView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @StateObject var recognizedContent = RecognizedContent()
+    @EnvironmentObject var recordModel: RecordModel
     @State private var showScanner = false
     @State private var isRecognizing = false
-    
-    @State private var rstName: String = ""
-    @State private var fdName: String = ""
-    @State private var fdType: String = ""
-    @State private var time: String = ""
-    @State private var cost: String = ""
-    @State private var calories: String = ""
-    @State private var fat: String = ""
-    @State private var sodium: String = ""
-    @State private var carbohydrate: String = ""
     
     var body: some View {
         VStack{
             HStack {
                 Text("Restaurant")
-                TextField("name", text: $rstName)
+                TextField("name", text: $recordModel.rstName)
             }
             HStack {
                 Text("Food")
-                TextField("name", text: $fdName)
+                TextField("name", text: $recordModel.fdName)
             }
             HStack {
                 Text("Type")
-                TextField("", text: $fdType)
+                TextField("", text: $recordModel.fdType)
             }
             HStack {
                 Text("Time")
-                TextField("", text: $time)
+                TextField("", text: $recordModel.time)
             }
             HStack {
                 Text("Cost")
-                TextField("", text: $cost)
+                TextField("", text: $recordModel.cost)
             }
             HStack {
                 Text("Calories")
-                TextField("", text: $recognizedContent.calories)
+                TextField("", text: $recordModel.calories)
             }
             HStack {
                 Text("Fat")
-                TextField("", text: $recognizedContent.fat)
+                TextField("", text: $recordModel.fat)
             }
             HStack {
                 Text("Sodium")
-                TextField("", text: $recognizedContent.sodium)
+                TextField("", text: $recordModel.sodium)
             }
             HStack {
                 Text("Carbohydrate")
-                TextField("", text: $recognizedContent.carbohydrate)
+                TextField("", text: $recordModel.carbohydrate)
             }
             Button("Save") {
                 let rst = Restaurant(context: viewContext)
-                rst.name = rstName
+                rst.name = recordModel.rstName
                 
                 let fd = Food(context: viewContext)
-                fd.name = fdName
+                fd.name = recordModel.fdName
                 
                 rst.addToFoods(fd)
                 do {
@@ -157,8 +168,7 @@ struct AddingView: View {
                 case .success(let scannedImages):
                     isRecognizing = true
                     
-                    TextRecognition(scannedImages: scannedImages,
-                                    recognizedContent: recognizedContent) {
+                    TextRecognition(scannedImages: scannedImages) {
                         // Text recognition is finished, hide the progress indicator.
                         isRecognizing = false
                     }.recognizeText()

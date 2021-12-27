@@ -15,7 +15,13 @@ class TextItem: Identifiable {
     var sodium: String = ""
 }
 
-class RecognizedContent: ObservableObject {
+class RecordModel: ObservableObject {
+    @Published var rstName: String = ""
+    @Published var fdName: String = ""
+    @Published var fdType: String = ""
+    @Published var time: String = ""
+    @Published var cost: String = ""
+
     @Published var calories: String = ""
     @Published var fat: String = ""
     @Published var carbohydrate: String = ""

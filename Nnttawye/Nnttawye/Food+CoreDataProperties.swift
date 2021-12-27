@@ -15,15 +15,16 @@ extension Food {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Food> {
         return NSFetchRequest<Food>(entityName: "Food")
     }
-
+    
+    @NSManaged public var name: String?
     @NSManaged public var type: String?
     @NSManaged public var time: String?
+    @NSManaged public var cost: Float
+
     @NSManaged public var fat: Float
     @NSManaged public var calories: Float
-    @NSManaged public var cost: Float
     @NSManaged public var carbohydrate: Float
     @NSManaged public var sodium: Float
-    @NSManaged public var name: String?
 
 }
 
