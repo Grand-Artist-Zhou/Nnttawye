@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-@objc public enum FoodType: Int {
+public enum FoodType: String {
     case default_, main
 }
 
-@objc public enum FoodTime: Int {
+public enum FoodTime: String {
     case default_, morning, noon, night
 }
 
@@ -28,7 +28,7 @@ class RecordModel: ObservableObject {
     @Published var rstName: String = "None"
     @Published var fdName: String = "None"
     @Published var fdType: FoodType = .default_
-    @Published var fdtime: FoodTime = .default_
+    @Published var fdTime: FoodTime = .default_
     @Published var fdcost: String = "0"
     
     @Published var calories: String = "0"

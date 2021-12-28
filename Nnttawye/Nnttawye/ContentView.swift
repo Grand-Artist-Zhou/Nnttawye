@@ -36,12 +36,12 @@ struct ContentView: View {
 
 struct PredictionView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Food.name, ascending: true)], predicate: NSPredicate(format: "time == %@", "Morning"), animation: .default) private var fds: FetchedResults<Food> //TODO: predicate problems
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Food.fdName, ascending: true)], predicate: NSPredicate(format: "time == %@", "Morning"), animation: .default) private var fds: FetchedResults<Food> //TODO: predicate problems
 
     var body: some View {
         List {
             ForEach(fds) { fd in
-                Text(fd.name)
+                Text(fd.fdName)
             }
         }
     }
@@ -143,10 +143,10 @@ struct AddingView: View {
                 rst.name = recordModel.rstName
                 
                 let fd = Food(context: viewContext)
-                fd.name = recordModel.fdName
-                fd.type = recordModel.fdType
-                fd.time = recordModel.fdtime
-                fd.cost = Float(recordModel.fdcost) ?? 0
+                fd.fdName = recordModel.fdName
+//                fd.fdType = recordModel.fdType
+//                fd.fdTime = recordModel.fdTime
+                fd.fdCost = Float(recordModel.fdcost) ?? 0
                 
                 fd.calories = Float(recordModel.calories) ?? 0
                 fd.fat = Float(recordModel.fat) ?? 0
