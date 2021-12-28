@@ -17,7 +17,7 @@ struct ContentView: View {
                 } label: {
                     Text("AddData")
                 }.padding()
-                                
+                
                 NavigationLink {
                     ViewDataView()
                 } label: {
@@ -36,12 +36,12 @@ struct ContentView: View {
 
 struct PredictionView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Food.fdName, ascending: true)], predicate: NSPredicate(format: "time == %@", "Morning"), animation: .default) private var fds: FetchedResults<Food> //TODO: predicate problems
-
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Food.name, ascending: true)], predicate:NSPredicate(format: "name == %@", "name"), animation: .default) private var fds: FetchedResults<Food>
+    
     var body: some View {
         List {
             ForEach(fds) { fd in
-                Text(fd.fdName)
+                Text(fd.name)
             }
         }
     }
@@ -53,23 +53,29 @@ struct ViewDataView: View {
     private var rsts: FetchedResults<Restaurant>
     
     private func deleteItems(offsets: IndexSet) {
-            offsets.map { rsts[$0] }.forEach(viewContext.delete)
-            
-            do {
-                try viewContext.save()
-            } catch {
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+        offsets.map { rsts[$0] }.forEach(viewContext.delete)
+        
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
     }
     
     var body: some View {
         VStack {
             List {
                 ForEach(rsts) { rst in
-                    Text("Restaurant: \(rst.name!)")
-                    Text("Food: \(rst.foods!)")
-                    Text("Time: \(rst.foods!.description)")
+                    Section() {
+                        Text("Restaurant: \(rst.name)")
+                        ForEach(rst.foodArray, id: \.self) { fd in
+                            Text("Food: \(fd.name)")
+                            Text("Type: \(fd.type)")
+                            Text("Time: \(fd.time)")
+                            Text("Cost: \(fd.cost)")
+                        }
+                    }
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -79,7 +85,7 @@ struct ViewDataView: View {
                 }
             }
             Button("Delete all") {
-
+                
             }
         }
     }
@@ -89,8 +95,6 @@ struct AddingView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @EnvironmentObject var recordModel: RecordModel
     
-    @State private var selectedFdType = FoodType.default_
-    @State private var selectedFdTime = FoodTime.default_
     @State private var showScanner = false
     @State private var isRecognizing = false
     
@@ -106,13 +110,13 @@ struct AddingView: View {
             }
             HStack {
                 Text("FoodType")
-                Picker("", selection: $selectedFdType) {
+                Picker("", selection: $recordModel.fdType) {
                     Text("Main").tag(FoodType.main)
                 }
             }
             HStack {
                 Text("FoodTime")
-                Picker("", selection: $selectedFdTime) {
+                Picker("", selection: $recordModel.fdTime) {
                     Text("Morning").tag(FoodTime.morning)
                     Text("Noon").tag(FoodTime.noon)
                     Text("Night").tag(FoodTime.night)
@@ -139,26 +143,30 @@ struct AddingView: View {
                 TextField("", text: $recordModel.carbohydrate)
             }
             Button("Save") {
-                let rst = Restaurant(context: viewContext)
-                rst.name = recordModel.rstName
-                
-                let fd = Food(context: viewContext)
-                fd.fdName = recordModel.fdName
-//                fd.fdType = recordModel.fdType
-//                fd.fdTime = recordModel.fdTime
-                fd.fdCost = Float(recordModel.fdcost) ?? 0
-                
-                fd.calories = Float(recordModel.calories) ?? 0
-                fd.fat = Float(recordModel.fat) ?? 0
-                fd.sodium = Float(recordModel.sodium) ?? 0
-                fd.carbohydrate = Float(recordModel.carbohydrate) ?? 0
-                
-                rst.addToFoods(fd)
-                do {
-                    try viewContext.save()
-                } catch {
-                    let nsError = error as NSError
-                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                if <#condition#> {
+                    <#code#>
+                } else {
+                    let rst = Restaurant(context: viewContext)
+                    rst.name = recordModel.rstName
+                    
+                    let fd = Food(context: viewContext)
+                    fd.name = recordModel.fdName
+                    fd.type = (recordModel.fdType).rawValue
+                    fd.time = (recordModel.fdTime).rawValue
+                    fd.cost = Float(recordModel.fdcost) ?? 0
+                    
+                    fd.calories = Float(recordModel.calories) ?? 0
+                    fd.fat = Float(recordModel.fat) ?? 0
+                    fd.sodium = Float(recordModel.sodium) ?? 0
+                    fd.carbohydrate = Float(recordModel.carbohydrate) ?? 0
+                    
+                    rst.addToFoods(fd)
+                    do {
+                        try viewContext.save()
+                    } catch {
+                        let nsError = error as NSError
+                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                    }
                 }
             }
         }

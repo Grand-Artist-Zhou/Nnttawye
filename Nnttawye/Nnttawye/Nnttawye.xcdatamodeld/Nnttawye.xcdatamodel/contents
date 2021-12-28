@@ -9,13 +9,14 @@
         <attribute name="sodium" optional="YES" attributeType="Float" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="time" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="origin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Restaurant" inverseName="foods" inverseEntity="Restaurant"/>
     </entity>
     <entity name="Restaurant" representedClassName="Restaurant" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="foods" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Food"/>
+        <relationship name="foods" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Food" inverseName="origin" inverseEntity="Food"/>
     </entity>
     <elements>
+        <element name="Food" positionX="-298.890625" positionY="52.734375" width="128" height="178"/>
         <element name="Restaurant" positionX="-63" positionY="-18" width="128" height="73"/>
-        <element name="Food" positionX="-298.890625" positionY="52.734375" width="128" height="163"/>
     </elements>
 </model>

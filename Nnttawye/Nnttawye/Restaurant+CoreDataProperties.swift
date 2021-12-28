@@ -16,9 +16,15 @@ extension Restaurant {
         return NSFetchRequest<Restaurant>(entityName: "Restaurant")
     }
 
-    @NSManaged public var name: String?
-    @NSManaged public var foods: NSSet?
+    @NSManaged public var name: String
+    @NSManaged public var foods: NSSet
 
+    public var foodArray: [Food] {
+        let set = foods as? Set<Food> ?? []
+        return set.sorted {
+            $0.name < $1.name
+        }
+    }
 }
 
 // MARK: Generated accessors for foods
