@@ -48,12 +48,26 @@ struct PredictionView: View {
     }
 }
 
+struct Method {
+    @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Food.name, ascending: true)], animation: .default) private var fds: FetchedResults<Food>
+    
+    // A default method allows Nntawye to regulate user's daily calories intake less than 2000
+    func default_DailyCaloriesLessThan2000(rsts: [String: [String: Food]]) -> [String: [String: Food]] {
+        
+        return rsts
+    }
+}
+
 struct GenView: View {
-    var rsts: [String: [String: Food]] = ["Mon": ["B": Food()], "Tue": ["B": Food()], "Wed": ["B": Food()],
-                                          "Thu": ["B": Food()], "Fri": ["B": Food()], "Sat": ["B": Food()], "Sun": ["B": Food()]]
+    @Environment(\.managedObjectContext) private var viewContext
+
+    var rsts: [String: [String: Food]] = [:]
     var methods: [([String: [String: Food]]) -> [String: [String: Food]]] = []
     
     init() {
+        rsts = ["Mon": ["B": Food(context: viewContext)], "Tue": ["B": Food(context: viewContext)], "Wed": ["B": Food(context: viewContext)],
+                "Thu": ["B": Food(context: viewContext)], "Fri": ["B": Food(context: viewContext)], "Sat": ["B": Food(context: viewContext)], "Sun": ["B": Food(context: viewContext)]]
         for i in 0..<methods.count {
             rsts = parseMethodsInOrder(function: methods[i], rsts: rsts)
         }
@@ -67,7 +81,7 @@ struct GenView: View {
         List {
             ForEach(Array(rsts.keys.sorted()), id: \.self) { key in
                 Section {
-                    Text("hi")
+                    Text((rsts[key]!["B"]!).name)
                 } header: {
                     Text(key)
                 }

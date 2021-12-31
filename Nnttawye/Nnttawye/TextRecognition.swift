@@ -8,6 +8,20 @@
 import SwiftUI
 import Vision
 
+struct TextPreviewView: View {
+    var text: String
+
+    var body: some View {
+        VStack {
+            ScrollView {
+                Text(text)
+                    .font(.body)
+                    .padding()
+            }
+        }
+    }
+}
+
 struct TextRecognition {
     var scannedImages: [UIImage]
     @EnvironmentObject var recordModel: RecordModel
