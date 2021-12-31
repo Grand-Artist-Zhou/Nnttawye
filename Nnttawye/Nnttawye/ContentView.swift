@@ -34,15 +34,25 @@ struct ContentView: View {
     }
 }
 
-struct PredictionView: View {
+struct GenView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Food.name, ascending: true)], predicate:NSPredicate(format: "name == %@", "name"), animation: .default) private var fds: FetchedResults<Food>
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Food.name, ascending: true)], predicate: NSPredicate(format: "name == %@", "name"), animation: .default) private var fds: FetchedResults<Food>
     
     var body: some View {
-        List {
-            ForEach(fds) { fd in
-                Text(fd.name)
-            }
+        Text("hi")
+    }
+}
+
+struct PredictionView: View {
+    var body: some View {
+        VStack {
+            Text("1. Foods calores add up must less than 2000")
+            Text("2. You cannot have same receipe in a regular day")
+            NavigationLink {
+                GenView()
+            } label: {
+                Text("Generate")
+            }.padding()
         }
     }
 }
@@ -70,14 +80,41 @@ struct ViewDataView: View {
                     Section() {
                         Text("Restaurant: \(rst.name)")
                         ForEach(rst.foodArray, id: \.self) { fd in
-                            Text("Food: \(fd.name)")
-                            Text("Type: \(fd.type)")
-                            Text("Time: \(fd.time)")
-                            Text("Cost: \(fd.cost)")
+                            HStack {
+                                Text("Food: \(fd.name)")
+                                VStack {
+                                    Text("Type: \(fd.type)")
+                                    Text("Time: \(fd.time)")
+                                    Text("Cost: \(fd.cost)")
+                                }
+                            }
+                        }.onDelete { indexSet in
+                            for index in indexSet {
+                                let foodToDelete = rst.foodArray[index]
+                                rst.removeFromFoods(foodToDelete)
+                            }
+                            do {
+                                try viewContext.save()
+                            } catch {
+                                print(error.localizedDescription)
+                            }
                         }
                     }
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete { indexSet in
+                    for index in indexSet {
+                        let rst = rsts[index]
+                        let foodsToDelete = rst.foods
+                        rst.removeFromFoods(foodsToDelete)
+                        
+                        viewContext.delete(rsts[index])
+                    }
+                    do {
+                        try viewContext.save()
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -93,6 +130,7 @@ struct ViewDataView: View {
 
 struct AddingView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Restaurant.name, ascending: true)], animation: .default) private var rsts: FetchedResults<Restaurant>
     @EnvironmentObject var recordModel: RecordModel
     
     @State private var showScanner = false
@@ -143,30 +181,33 @@ struct AddingView: View {
                 TextField("", text: $recordModel.carbohydrate)
             }
             Button("Save") {
-                if <#condition#> {
-                    <#code#>
-                } else {
-                    let rst = Restaurant(context: viewContext)
+                let rst: Restaurant
+                rsts.nsPredicate = NSPredicate(format: "name == %@", recordModel.rstName)
+                
+                if rsts.isEmpty {
+                    rst = Restaurant(context: viewContext)
                     rst.name = recordModel.rstName
-                    
-                    let fd = Food(context: viewContext)
-                    fd.name = recordModel.fdName
-                    fd.type = (recordModel.fdType).rawValue
-                    fd.time = (recordModel.fdTime).rawValue
-                    fd.cost = Float(recordModel.fdcost) ?? 0
-                    
-                    fd.calories = Float(recordModel.calories) ?? 0
-                    fd.fat = Float(recordModel.fat) ?? 0
-                    fd.sodium = Float(recordModel.sodium) ?? 0
-                    fd.carbohydrate = Float(recordModel.carbohydrate) ?? 0
-                    
-                    rst.addToFoods(fd)
-                    do {
-                        try viewContext.save()
-                    } catch {
-                        let nsError = error as NSError
-                        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                    }
+                } else {
+                    rst = rsts.first!
+                }
+                
+                let fd = Food(context: viewContext)
+                fd.name = recordModel.fdName
+                fd.type = (recordModel.fdType).rawValue
+                fd.time = (recordModel.fdTime).rawValue
+                fd.cost = Float(recordModel.fdcost) ?? 0
+                
+                fd.calories = Float(recordModel.calories) ?? 0
+                fd.fat = Float(recordModel.fat) ?? 0
+                fd.sodium = Float(recordModel.sodium) ?? 0
+                fd.carbohydrate = Float(recordModel.carbohydrate) ?? 0
+                
+                rst.addToFoods(fd)
+                do {
+                    try viewContext.save()
+                } catch {
+                    let nsError = error as NSError
+                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
                 }
             }
         }
