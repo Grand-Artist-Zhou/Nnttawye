@@ -34,15 +34,6 @@ struct ContentView: View {
     }
 }
 
-struct GenView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Food.name, ascending: true)], predicate: NSPredicate(format: "name == %@", "name"), animation: .default) private var fds: FetchedResults<Food>
-    
-    var body: some View {
-        Text("hi")
-    }
-}
-
 struct PredictionView: View {
     var body: some View {
         VStack {
@@ -53,6 +44,34 @@ struct PredictionView: View {
             } label: {
                 Text("Generate")
             }.padding()
+        }
+    }
+}
+
+struct GenView: View {
+    var rsts: [String: [String: Food]] = ["Mon": ["B": Food()], "Tue": ["B": Food()], "Wed": ["B": Food()],
+                                          "Thu": ["B": Food()], "Fri": ["B": Food()], "Sat": ["B": Food()], "Sun": ["B": Food()]]
+    var methods: [([String: [String: Food]]) -> [String: [String: Food]]] = []
+    
+    init() {
+        for i in 0..<methods.count {
+            rsts = parseMethodsInOrder(function: methods[i], rsts: rsts)
+        }
+    }
+    
+    func parseMethodsInOrder(function: ([String: [String: Food]]) -> [String: [String: Food]], rsts: [String: [String: Food]]) -> [String: [String: Food]] {
+        return rsts
+    }
+    
+    var body: some View {
+        List {
+            ForEach(Array(rsts.keys.sorted()), id: \.self) { key in
+                Section {
+                    Text("hi")
+                } header: {
+                    Text(key)
+                }
+            }
         }
     }
 }
