@@ -52,9 +52,42 @@ struct Method {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Food.name, ascending: true)], animation: .default) private var fds: FetchedResults<Food>
     
+    static let shared = Method()
+    
     // A default method allows Nntawye to regulate user's daily calories intake less than 2000
-    func default_DailyCaloriesLessThan2000(rsts: [String: [String: Food]]) -> [String: [String: Food]] {
-        
+    func default_DailyCaloriesLessThan2000(rsts: inout [String: [String: Food]]) -> [String: [String: Food]] {
+        rsts.forEach { key, value in
+            let bCal = value["B"]!.calories
+            let lCal = value["L"]!.calories
+            let dCal = value["D"]!.calories
+            
+            if bCal >= 2000 {
+                fds.nsPredicate = NSPredicate(format: "calories < %@", 2000)
+                if fds.isEmpty {
+                    fatalError()
+                } else {
+                    rsts[key]!["B"] = fds.first
+                }
+            }
+            
+            if bCal + lCal >= 2000 {
+                fds.nsPredicate = NSPredicate(format: "calories < %@", 2000 - bCal)
+                if fds.isEmpty {
+                    fatalError()
+                } else {
+                    rsts[key]!["L"] = fds.first
+                }
+            }
+            
+            if bCal + lCal + dCal >= 2000 {
+                fds.nsPredicate = NSPredicate(format: "calories < %@", 2000 - bCal - lCal)
+                if fds.isEmpty {
+                    fatalError()
+                } else {
+                    rsts[key]!["D"] = fds.first
+                }
+            }
+        }
         return rsts
     }
 }
@@ -66,8 +99,14 @@ struct GenView: View {
     var methods: [([String: [String: Food]]) -> [String: [String: Food]]] = []
     
     init() {
-        rsts = ["Mon": ["B": Food(context: viewContext)], "Tue": ["B": Food(context: viewContext)], "Wed": ["B": Food(context: viewContext)],
-                "Thu": ["B": Food(context: viewContext)], "Fri": ["B": Food(context: viewContext)], "Sat": ["B": Food(context: viewContext)], "Sun": ["B": Food(context: viewContext)]]
+        let fd = Food(context: viewContext)
+        fd.name = "hi"
+        fd.calories = 0
+        fd.carbohydrate = 0
+        
+        rsts = ["Mon": ["B": fd, "L": fd, "D": fd], "Tue": ["B": fd, "L": fd, "D": fd], "Wed": ["B": fd, "L": fd, "D": fd],
+                "Thu": ["B": fd, "L": fd, "D": fd], "Fri": ["B": fd, "L": fd, "D": fd], "Sat": ["B": fd, "L": fd, "D": fd], "Sun": ["B": fd, "L": fd, "D": fd]]
+        
         for i in 0..<methods.count {
             rsts = parseMethodsInOrder(function: methods[i], rsts: rsts)
         }
@@ -81,7 +120,17 @@ struct GenView: View {
         List {
             ForEach(Array(rsts.keys.sorted()), id: \.self) { key in
                 Section {
-                    Text((rsts[key]!["B"]!).name)
+                    VStack {
+                        HStack {
+                            Text("Breakfast: \((rsts[key]!["B"]!).name)")
+                            VStack {
+                                Text("Calories: \((rsts[key]!["B"]!).calories)")
+                                Text("Carbohydrate: \((rsts[key]!["B"]!).carbohydrate)")
+                            }
+                        }
+                        Text((rsts[key]!["L"]!).name)
+                        Text((rsts[key]!["D"]!).name)
+                    }
                 } header: {
                     Text(key)
                 }
