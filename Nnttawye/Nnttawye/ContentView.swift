@@ -48,74 +48,64 @@ struct PredictionView: View {
     }
 }
 
-struct Method {
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Food.name, ascending: true)], animation: .default) private var fds: FetchedResults<Food>
-    
-    static let shared = Method()
-    
-    // A default method allows Nntawye to regulate user's daily calories intake less than 2000
-    func default_DailyCaloriesLessThan2000(rsts: inout [String: [String: Food]]) -> [String: [String: Food]] {
-        rsts.forEach { key, value in
-            let bCal = value["B"]!.calories
-            let lCal = value["L"]!.calories
-            let dCal = value["D"]!.calories
-            
-            if bCal >= 2000 {
-                fds.nsPredicate = NSPredicate(format: "calories < %@", 2000)
-                if fds.isEmpty {
-                    fatalError()
-                } else {
-                    rsts[key]!["B"] = fds.first
-                }
-            }
-            
-            if bCal + lCal >= 2000 {
-                fds.nsPredicate = NSPredicate(format: "calories < %@", 2000 - bCal)
-                if fds.isEmpty {
-                    fatalError()
-                } else {
-                    rsts[key]!["L"] = fds.first
-                }
-            }
-            
-            if bCal + lCal + dCal >= 2000 {
-                fds.nsPredicate = NSPredicate(format: "calories < %@", 2000 - bCal - lCal)
-                if fds.isEmpty {
-                    fatalError()
-                } else {
-                    rsts[key]!["D"] = fds.first
-                }
-            }
-        }
-        return rsts
-    }
-}
-
 struct GenView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
-    var rsts: [String: [String: Food]] = [:]
-    var methods: [([String: [String: Food]]) -> [String: [String: Food]]] = []
+    @State private var rsts: [String: [String: Food]] = [:]
+    @State private var methods: [(inout [String: [String: Food]]) -> [String: [String: Food]]] = []
     
-    init() {
-        let fd = Food(context: viewContext)
-        fd.name = "hi"
-        fd.calories = 0
-        fd.carbohydrate = 0
-        
-        rsts = ["Mon": ["B": fd, "L": fd, "D": fd], "Tue": ["B": fd, "L": fd, "D": fd], "Wed": ["B": fd, "L": fd, "D": fd],
-                "Thu": ["B": fd, "L": fd, "D": fd], "Fri": ["B": fd, "L": fd, "D": fd], "Sat": ["B": fd, "L": fd, "D": fd], "Sun": ["B": fd, "L": fd, "D": fd]]
-        
-        for i in 0..<methods.count {
-            rsts = parseMethodsInOrder(function: methods[i], rsts: rsts)
+    struct Methods {
+
+        // A default method allows Nntawye to regulate user's daily calories intake less than 2000
+        static func default_DailyCaloriesLessThan2000(rsts: inout [String: [String: Food]]) -> [String: [String: Food]] {
+            let fdFetchRequest: NSFetchRequest<Food> = Food.fetchRequest()
+            fdFetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Food.name, ascending: true)]
+            let persistenceController = PersistenceController.shared
+
+            let managedObjectContext = persistenceController.container.viewContext
+            var fds: [Food] = []
+            do {
+                fds = try managedObjectContext.fetch(fdFetchRequest)
+            } catch {
+                print("problem")
+            }
+            
+            rsts.forEach { key, value in
+                let bCal = value["B"]!.calories
+                let lCal = value["L"]!.calories
+                let dCal = value["D"]!.calories
+                
+                if bCal >= 2000 {
+                    fdFetchRequest.predicate = NSPredicate(format: "calories < %@", 2000)
+                    if fds.isEmpty {
+                        fatalError()
+                    } else {
+                        rsts[key]!["B"] = fds.first
+                    }
+                }
+                
+                if bCal + lCal >= 2000 {
+                    fdFetchRequest.predicate = NSPredicate(format: "calories < %@", 2000 - bCal)
+                    if fds.isEmpty {
+                        fatalError()
+                    } else {
+                        rsts[key]!["L"] = fds.first
+                    }
+                }
+                
+                if bCal + lCal + dCal >= 2000 {
+                    fdFetchRequest.predicate = NSPredicate(format: "calories < %@", 2000 - bCal - lCal)
+                    if fds.isEmpty {
+                        fatalError()
+                    } else {
+                        rsts[key]!["D"] = fds.first
+                    }
+                }
+            }
+            return rsts
         }
     }
-    
-    func parseMethodsInOrder(function: ([String: [String: Food]]) -> [String: [String: Food]], rsts: [String: [String: Food]]) -> [String: [String: Food]] {
-        return rsts
-    }
-    
+
     var body: some View {
         List {
             ForEach(Array(rsts.keys.sorted()), id: \.self) { key in
@@ -128,12 +118,40 @@ struct GenView: View {
                                 Text("Carbohydrate: \((rsts[key]!["B"]!).carbohydrate)")
                             }
                         }
-                        Text((rsts[key]!["L"]!).name)
-                        Text((rsts[key]!["D"]!).name)
+                        HStack {
+                            Text("Lunch: \((rsts[key]!["L"]!).name)")
+                            VStack {
+                                Text("Calories: \((rsts[key]!["L"]!).calories)")
+                                Text("Carbohydrate: \((rsts[key]!["L"]!).carbohydrate)")
+                            }
+                        }
+                        HStack {
+                            Text("Dinner: \((rsts[key]!["D"]!).name)")
+                            VStack {
+                                Text("Calories: \((rsts[key]!["D"]!).calories)")
+                                Text("Carbohydrate: \((rsts[key]!["D"]!).carbohydrate)")
+                            }
+                        }
                     }
                 } header: {
                     Text(key)
                 }
+            }
+        }.onAppear {
+            // Initialize foods
+            let fd = Food(context: viewContext)
+            fd.name = "unspecified"
+            fd.calories = 3000
+            fd.carbohydrate = 0
+            
+            rsts = ["Mon": ["B": fd, "L": fd, "D": fd], "Tue": ["B": fd, "L": fd, "D": fd], "Wed": ["B": fd, "L": fd, "D": fd],
+                    "Thu": ["B": fd, "L": fd, "D": fd], "Fri": ["B": fd, "L": fd, "D": fd], "Sat": ["B": fd, "L": fd, "D": fd], "Sun": ["B": fd, "L": fd, "D": fd]]
+        
+            // Initialize methods array
+            methods.append(Methods.default_DailyCaloriesLessThan2000)
+            
+            for i in 0..<methods.count {
+                rsts = methods[i](&rsts)
             }
         }
     }
