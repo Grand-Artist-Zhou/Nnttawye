@@ -76,7 +76,7 @@ struct GenView: View {
                 let dCal = value["D"]!.calories
                 
                 if bCal >= 2000 {
-                    fdFetchRequest.predicate = NSPredicate(format: "calories < %@", 2000)
+                    fdFetchRequest.predicate = NSPredicate(format: "calories < %f", 2000)
                     if fds.isEmpty {
                         fatalError()
                     } else {
@@ -85,7 +85,7 @@ struct GenView: View {
                 }
                 
                 if bCal + lCal >= 2000 {
-                    fdFetchRequest.predicate = NSPredicate(format: "calories < %@", 2000 - bCal)
+                    fdFetchRequest.predicate = NSPredicate(format: "calories < %f", 2000 - bCal)
                     if fds.isEmpty {
                         fatalError()
                     } else {
@@ -94,7 +94,7 @@ struct GenView: View {
                 }
                 
                 if bCal + lCal + dCal >= 2000 {
-                    fdFetchRequest.predicate = NSPredicate(format: "calories < %@", 2000 - bCal - lCal)
+                    fdFetchRequest.predicate = NSPredicate(format: "calories < %f", 2000 - bCal - lCal)
                     if fds.isEmpty {
                         fatalError()
                     } else {
@@ -104,6 +104,7 @@ struct GenView: View {
             }
             return rsts
         }
+        
     }
 
     var body: some View {
@@ -162,17 +163,6 @@ struct ViewDataView: View {
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Restaurant.name, ascending: true)], animation: .default)
     private var rsts: FetchedResults<Restaurant>
     
-    private func deleteItems(offsets: IndexSet) {
-        offsets.map { rsts[$0] }.forEach(viewContext.delete)
-        
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-    }
-    
     var body: some View {
         VStack {
             List {
@@ -186,6 +176,7 @@ struct ViewDataView: View {
                                     Text("Type: \(fd.type)")
                                     Text("Time: \(fd.time)")
                                     Text("Cost: \(fd.cost)")
+                                    Text("Calories: \(fd.calories)")
                                 }
                             }
                         }.onDelete { indexSet in
@@ -222,7 +213,19 @@ struct ViewDataView: View {
                 }
             }
             Button("Delete all") {
-                
+                do {
+                    var fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Food")
+                    var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                    try viewContext.execute(deleteRequest)
+                    try viewContext.save()
+                    
+                    fetchRequest = NSFetchRequest(entityName: "Restaurant")
+                    deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                    try viewContext.execute(deleteRequest)
+                    try viewContext.save()
+                } catch {
+                    fatalError()
+                }
             }
         }
     }
