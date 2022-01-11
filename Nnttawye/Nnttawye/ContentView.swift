@@ -13,7 +13,7 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 NavigationLink {
-                    AddingView()
+                    AddView()
                 } label: {
                     Text("AddData")
                 }.padding()
@@ -52,57 +52,51 @@ struct GenView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @State private var rsts: [String: [String: Food]] = [:]
-    @State private var methods: [(inout [String: [String: Food]]) -> [String: [String: Food]]] = []
+    @State private var methods: [(inout [String: [String: Food]]) -> Void] = []
     
     struct Methods {
 
         // A default method allows Nntawye to regulate user's daily calories intake less than 2000
-        static func default_DailyCaloriesLessThan2000(rsts: inout [String: [String: Food]]) -> [String: [String: Food]] {
-            let fdFetchRequest: NSFetchRequest<Food> = Food.fetchRequest()
-            fdFetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Food.name, ascending: true)]
+        static func default_DailyCaloriesLessThan2000(rsts: inout [String: [String: Food]]) {
             let persistenceController = PersistenceController.shared
+            let viewContext = persistenceController.container.viewContext
+            
+            let fdFetchRequest: NSFetchRequest<Food> = Food.fetchRequest()
+            fdFetchRequest.predicate = NSPredicate(format: "calories < %d", 2000)
 
-            let managedObjectContext = persistenceController.container.viewContext
             var fds: [Food] = []
-            do {
-                fds = try managedObjectContext.fetch(fdFetchRequest)
-            } catch {
-                print("problem")
-            }
             
             rsts.forEach { key, value in
-                let bCal = value["B"]!.calories
-                let lCal = value["L"]!.calories
-                let dCal = value["D"]!.calories
-                
-                if bCal >= 2000 {
-                    fdFetchRequest.predicate = NSPredicate(format: "calories < %f", 2000)
-                    if fds.isEmpty {
-                        fatalError()
-                    } else {
-                        rsts[key]!["B"] = fds.first
-                    }
+                do {
+                    fds = try viewContext.fetch(fdFetchRequest) //TODO: pass in method specific database?
+                } catch {
+                    fatalError()
                 }
                 
-                if bCal + lCal >= 2000 {
-                    fdFetchRequest.predicate = NSPredicate(format: "calories < %f", 2000 - bCal)
-                    if fds.isEmpty {
-                        fatalError()
-                    } else {
-                        rsts[key]!["L"] = fds.first
+                var canDo: Bool = false
+                for i in 0..<fds.count {
+                    rsts[key]!["B"]! = fds[i]
+                    for j in 0..<fds.count {
+                        rsts[key]!["L"]! = fds[j]
+                        for k in 0..<fds.count {
+                            rsts[key]!["D"]! = fds[k]
+                            if rsts[key]!["B"]!.calories + rsts[key]!["L"]!.calories + rsts[key]!["D"]!.calories <= 2000 {
+                                canDo = true
+                                break
+                            }
+                        }
+                        if canDo {
+                            break
+                        }
+                    }
+                    if canDo {
+                        break
                     }
                 }
-                
-                if bCal + lCal + dCal >= 2000 {
-                    fdFetchRequest.predicate = NSPredicate(format: "calories < %f", 2000 - bCal - lCal)
-                    if fds.isEmpty {
-                        fatalError()
-                    } else {
-                        rsts[key]!["D"] = fds.first
-                    }
+                if !canDo {
+                    fatalError()
                 }
             }
-            return rsts
         }
         
     }
@@ -112,13 +106,15 @@ struct GenView: View {
             ForEach(Array(rsts.keys.sorted()), id: \.self) { key in
                 Section {
                     VStack {
-                        HStack {
                             Text("Breakfast: \((rsts[key]!["B"]!).name)")
-                            VStack {
+                            HStack {
                                 Text("Calories: \((rsts[key]!["B"]!).calories)")
+                            }
+                            HStack {
                                 Text("Carbohydrate: \((rsts[key]!["B"]!).carbohydrate)")
                             }
-                        }
+                        
+                        
                         HStack {
                             Text("Lunch: \((rsts[key]!["L"]!).name)")
                             VStack {
@@ -141,8 +137,8 @@ struct GenView: View {
         }.onAppear {
             // Initialize foods
             let fd = Food(context: viewContext)
-            fd.name = "unspecified"
-            fd.calories = 3000
+            fd.name = "name"
+            fd.calories = 0
             fd.carbohydrate = 0
             
             rsts = ["Mon": ["B": fd, "L": fd, "D": fd], "Tue": ["B": fd, "L": fd, "D": fd], "Wed": ["B": fd, "L": fd, "D": fd],
@@ -152,7 +148,7 @@ struct GenView: View {
             methods.append(Methods.default_DailyCaloriesLessThan2000)
             
             for i in 0..<methods.count {
-                rsts = methods[i](&rsts)
+                methods[i](&rsts)
             }
         }
     }
@@ -231,7 +227,7 @@ struct ViewDataView: View {
     }
 }
 
-struct AddingView: View {
+struct AddView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Restaurant.name, ascending: true)], animation: .default) private var rsts: FetchedResults<Restaurant>
     @EnvironmentObject var recordModel: RecordModel
@@ -292,6 +288,10 @@ struct AddingView: View {
                     rst.name = recordModel.rstName
                 } else {
                     rst = rsts.first!
+                }
+                
+                if rst.foodArray.contains(where: { $0.name == recordModel.fdName }) {
+                    fatalError("Cannot have the same food in a restaurants.")
                 }
                 
                 let fd = Food(context: viewContext)
