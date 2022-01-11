@@ -35,15 +35,30 @@ struct ContentView: View {
 }
 
 struct PredictionView: View {
+    @State private var isPressed: Bool = false
+    @State private var chosenMethod: Method = .caloriesLessThan2000
+    
     var body: some View {
         VStack {
-            Text("1. Foods calores add up must less than 2000")
-            Text("2. You cannot have same receipe in a regular day")
-            NavigationLink {
-                GenView()
-            } label: {
-                Text("Generate")
-            }.padding()
+            if isPressed {
+                GenView(chosenMethod: chosenMethod)
+            } else {
+                Button {
+                    isPressed = true
+                    chosenMethod = .randomizeSweetGreen
+                } label: {
+                    Text("Randomize Sweet Green")
+                }
+                .buttonStyle(BlueButton())
+                
+                Button {
+                    isPressed = true
+                    chosenMethod = .caloriesLessThan2000
+                } label: {
+                    Text("Foods calores add up must less than 2000")
+                }
+                .buttonStyle(BlueButton())
+            }
         }
     }
 }
@@ -52,7 +67,7 @@ struct GenView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
     @State private var rsts: [String: [String: Food]] = [:]
-    @State private var methods: [(inout [String: [String: Food]]) -> Void] = []
+    var chosenMethod: Method
     
     struct Methods {
 
@@ -68,7 +83,7 @@ struct GenView: View {
             
             rsts.forEach { key, value in
                 do {
-                    fds = try viewContext.fetch(fdFetchRequest) //TODO: pass in method specific database?
+                    fds = try viewContext.fetch(fdFetchRequest)
                 } catch {
                     fatalError()
                 }
@@ -145,10 +160,10 @@ struct GenView: View {
                     "Thu": ["B": fd, "L": fd, "D": fd], "Fri": ["B": fd, "L": fd, "D": fd], "Sat": ["B": fd, "L": fd, "D": fd], "Sun": ["B": fd, "L": fd, "D": fd]]
         
             // Initialize methods array
-            methods.append(Methods.default_DailyCaloriesLessThan2000)
-            
-            for i in 0..<methods.count {
-                methods[i](&rsts)
+            if chosenMethod == .caloriesLessThan2000 {
+                Methods.default_DailyCaloriesLessThan2000(rsts: &rsts)
+            } else if chosenMethod == .randomizeSweetGreen{
+                
             }
         }
     }
