@@ -118,41 +118,48 @@ struct GenView: View {
 
     var body: some View {
         List {
-            ForEach(Array(rsts.keys.sorted()), id: \.self) { key in
+            ForEach([rsts.keys.first(where: {$0 == "Mon"}),
+                     rsts.keys.first(where: {$0 == "Tue"}),
+                     rsts.keys.first(where: {$0 == "Wed"}),
+                     rsts.keys.first(where: {$0 == "Thu"}),
+                     rsts.keys.first(where: {$0 == "Fri"}),
+                     rsts.keys.first(where: {$0 == "Sat"}),
+                     rsts.keys.first(where: {$0 == "Sun"})], id: \.self) { key in
                 Section {
-                    VStack {
-                            Text("Breakfast: \((rsts[key]!["B"]!).name)")
-                            HStack {
-                                Text("Calories: \((rsts[key]!["B"]!).calories)")
-                            }
-                            HStack {
-                                Text("Carbohydrate: \((rsts[key]!["B"]!).carbohydrate)")
-                            }
-                        
-                        
+                    VStack(alignment: .leading) {
                         HStack {
-                            Text("Lunch: \((rsts[key]!["L"]!).name)")
-                            VStack {
-                                Text("Calories: \((rsts[key]!["L"]!).calories)")
-                                Text("Carbohydrate: \((rsts[key]!["L"]!).carbohydrate)")
+                            VStack(alignment: .leading) {
+                                Text("\((rsts[key!]!["B"]!).name)")
+                                Text("$\((rsts[key!]!["B"]!).cost)")
+                                Text("Some description")
                             }
-                        }
+                            Image("Food").resizable()
+                        }.background(Color.red)
                         HStack {
-                            Text("Dinner: \((rsts[key]!["D"]!).name)")
-                            VStack {
-                                Text("Calories: \((rsts[key]!["D"]!).calories)")
-                                Text("Carbohydrate: \((rsts[key]!["D"]!).carbohydrate)")
+                            VStack(alignment: .leading) {
+                                Text("\((rsts[key!]!["L"]!).name)")
+                                Text("$\((rsts[key!]!["L"]!).cost)")
+                                Text("Some description")
                             }
-                        }
+                            Image("Food").resizable()
+                        }.background(Color.green)
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text("\((rsts[key!]!["D"]!).name)")
+                                Text("$\((rsts[key!]!["D"]!).cost)")
+                                Text("Some description")
+                            }
+                            Image("Food").resizable()
+                        }.background(Color.blue)
                     }
                 } header: {
-                    Text(key)
+                    Text(key!)
                 }
             }
         }.onAppear {
             // Initialize foods
             let fd = Food(context: viewContext)
-            fd.name = "name"
+            fd.name = ""
             fd.calories = 0
             fd.carbohydrate = 0
             
