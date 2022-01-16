@@ -69,7 +69,7 @@ struct GenView: View {
     @State private var rsts: [String: [String: Food]] = [:]
     var chosenMethod: Method
     
-    struct Methods {
+    class Methods {
 
         // A default method allows Nntawye to regulate user's daily calories intake less than 2000
         static func default_DailyCaloriesLessThan2000(rsts: inout [String: [String: Food]]) {
@@ -131,6 +131,7 @@ struct GenView: View {
                             VStack(alignment: .leading) {
                                 Text("\((rsts[key!]!["B"]!).name)")
                                 Text("$\((rsts[key!]!["B"]!).cost)")
+                                Text("\((rsts[key!]!["B"]!).calories) cal")
                                 Text("Some description")
                             }
                             Image("Food").resizable()
@@ -139,6 +140,7 @@ struct GenView: View {
                             VStack(alignment: .leading) {
                                 Text("\((rsts[key!]!["L"]!).name)")
                                 Text("$\((rsts[key!]!["L"]!).cost)")
+                                Text("\((rsts[key!]!["B"]!).calories) cal")
                                 Text("Some description")
                             }
                             Image("Food").resizable()
@@ -146,7 +148,8 @@ struct GenView: View {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text("\((rsts[key!]!["D"]!).name)")
-                                Text("$\((rsts[key!]!["D"]!).cost)")
+                                Text("$\((round((rsts[key!]!["D"]!).cost) * 100) / 100.0)")
+                                Text("\((rsts[key!]!["D"]!).calories) cal")
                                 Text("Some description")
                             }
                             Image("Food").resizable()
@@ -159,7 +162,8 @@ struct GenView: View {
         }.onAppear {
             // Initialize foods
             let fd = Food(context: viewContext)
-            fd.name = ""
+            fd.name = "Name"
+            fd.cost = 0
             fd.calories = 0
             fd.carbohydrate = 0
             
@@ -190,10 +194,10 @@ struct ViewDataView: View {
                         ForEach(rst.foodArray, id: \.self) { fd in
                             HStack {
                                 Text("Food: \(fd.name)")
-                                VStack {
+                                VStack(alignment: .leading, spacing: 10) {
                                     Text("Type: \(fd.type)")
                                     Text("Time: \(fd.time)")
-                                    Text("Cost: \(fd.cost)")
+                                    Text("Cost: \((fd.cost * 100).rounded() / 100)")
                                     Text("Calories: \(fd.calories)")
                                 }
                             }
