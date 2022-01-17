@@ -65,7 +65,6 @@ struct PredictionView: View {
 
 struct GenView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
     @State private var rsts: [String: [String: Food]] = [:]
     var chosenMethod: Method
     
@@ -77,24 +76,29 @@ struct GenView: View {
             let viewContext = persistenceController.container.viewContext
             
             let fdFetchRequest: NSFetchRequest<Food> = Food.fetchRequest()
-            fdFetchRequest.predicate = NSPredicate(format: "calories < %d", 2000)
+            fdFetchRequest.predicate = NSPredicate(format: "calories <= %d", 2000)
 
             var fds: [Food] = []
             
-            rsts.forEach { key, value in
+            ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].forEach { key in
                 do {
                     fds = try viewContext.fetch(fdFetchRequest)
                 } catch {
-                    fatalError()
+                    fatalError("fetch error")
+                }
+                if fds.isEmpty {
+                    fatalError("Not prop food")
                 }
                 
                 var canDo: Bool = false
+                var dic: [String: Food] = [:]
                 for i in 0..<fds.count {
-                    rsts[key]!["B"]! = fds[i]
+                    dic["B"] = fds[i]
                     for j in 0..<fds.count {
-                        rsts[key]!["L"]! = fds[j]
+                        dic["L"] = fds[j]
                         for k in 0..<fds.count {
-                            rsts[key]!["D"]! = fds[k]
+                            dic["D"] = fds[k]
+                            rsts[key] = dic
                             if rsts[key]!["B"]!.calories + rsts[key]!["L"]!.calories + rsts[key]!["D"]!.calories <= 2000 {
                                 canDo = true
                                 break
@@ -112,70 +116,56 @@ struct GenView: View {
                     fatalError()
                 }
             }
+            print(rsts.debugDescription)
         }
         
     }
 
     var body: some View {
         List {
-            ForEach([rsts.keys.first(where: {$0 == "Mon"}),
-                     rsts.keys.first(where: {$0 == "Tue"}),
-                     rsts.keys.first(where: {$0 == "Wed"}),
-                     rsts.keys.first(where: {$0 == "Thu"}),
-                     rsts.keys.first(where: {$0 == "Fri"}),
-                     rsts.keys.first(where: {$0 == "Sat"}),
-                     rsts.keys.first(where: {$0 == "Sun"})], id: \.self) { key in
+            ForEach(["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], id: \.self) { key in
                 Section {
                     VStack(alignment: .leading) {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("\((rsts[key!]!["B"]!).name)")
-                                Text("$\((rsts[key!]!["B"]!).cost)")
-                                Text("\((rsts[key!]!["B"]!).calories) cal")
+                                Text("\((rsts[key]!["B"]!).name)") //
+                                Text("$\((rsts[key]!["B"]!).cost)")
+                                Text("\((rsts[key]!["B"]!).calories) cal")
                                 Text("Some description")
                             }
                             Image("Food").resizable()
                         }.background(Color.red)
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("\((rsts[key!]!["L"]!).name)")
-                                Text("$\((rsts[key!]!["L"]!).cost)")
-                                Text("\((rsts[key!]!["B"]!).calories) cal")
+                                Text("\((rsts[key]!["L"]!).name)")
+                                Text("$\((rsts[key]!["L"]!).cost)")
+                                Text("\((rsts[key]!["L"]!).calories) cal")
                                 Text("Some description")
                             }
                             Image("Food").resizable()
                         }.background(Color.green)
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("\((rsts[key!]!["D"]!).name)")
-                                Text("$\((round((rsts[key!]!["D"]!).cost) * 100) / 100.0)")
-                                Text("\((rsts[key!]!["D"]!).calories) cal")
+                                Text("\((rsts[key]!["D"]!).name)")
+                                Text("$\((rsts[key]!["D"]!).cost)")
+                                Text("\((rsts[key]!["D"]!).calories) cal")
                                 Text("Some description")
                             }
                             Image("Food").resizable()
                         }.background(Color.blue)
                     }
                 } header: {
-                    Text(key!)
+                    Text(key)
                 }
             }
         }.onAppear {
-            // Initialize foods
-            let fd = Food(context: viewContext)
-            fd.name = "Name"
-            fd.cost = 0
-            fd.calories = 0
-            fd.carbohydrate = 0
-            
-            rsts = ["Mon": ["B": fd, "L": fd, "D": fd], "Tue": ["B": fd, "L": fd, "D": fd], "Wed": ["B": fd, "L": fd, "D": fd],
-                    "Thu": ["B": fd, "L": fd, "D": fd], "Fri": ["B": fd, "L": fd, "D": fd], "Sat": ["B": fd, "L": fd, "D": fd], "Sun": ["B": fd, "L": fd, "D": fd]]
-        
             // Initialize methods array
             if chosenMethod == .caloriesLessThan2000 {
                 Methods.default_DailyCaloriesLessThan2000(rsts: &rsts)
             } else if chosenMethod == .randomizeSweetGreen{
                 
             }
+//            print(rsts.debugDescription)
         }
     }
 }
