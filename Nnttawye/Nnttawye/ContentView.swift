@@ -128,7 +128,7 @@ struct GenView: View {
                     VStack(alignment: .leading) {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("\((rsts[key]!["B"]!).name)") //
+                                Text("\((rsts[key]!["B"]!).name)") // todo
                                 Text("$\((rsts[key]!["B"]!).cost)")
                                 Text("\((rsts[key]!["B"]!).calories) cal")
                                 Text("Some description")
@@ -160,6 +160,7 @@ struct GenView: View {
             }
         }.onAppear {
             // Initialize methods array
+            rsts = ["Mon": [:], "Tue": [:], "Wed": [:], "Thu": [:], "Fri": [:], "Sat": [:], "Sun": [:]]
             if chosenMethod == .caloriesLessThan2000 {
                 Methods.default_DailyCaloriesLessThan2000(rsts: &rsts)
             } else if chosenMethod == .randomizeSweetGreen{
