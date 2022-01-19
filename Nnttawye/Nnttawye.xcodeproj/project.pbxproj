@@ -14,7 +14,6 @@
 		CB139D77277291CB000FD249 /* Nnttawye.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CB139D75277291CB000FD249 /* Nnttawye.xcdatamodeld */; };
 		CB139D7E2772923D000FD249 /* ScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D7D2772923D000FD249 /* ScannerView.swift */; };
 		CB139D812773AA38000FD249 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D802773AA38000FD249 /* Model.swift */; };
-		CB139D832773ACC3000FD249 /* TextRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D822773ACC3000FD249 /* TextRecognition.swift */; };
 		CB139D9627762F9F000FD249 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D9227762F9F000FD249 /* Food+CoreDataClass.swift */; };
 		CB139D9727762F9F000FD249 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D9327762F9F000FD249 /* Food+CoreDataProperties.swift */; };
 		CB139D9827762F9F000FD249 /* Restaurant+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB139D9427762F9F000FD249 /* Restaurant+CoreDataClass.swift */; };
@@ -34,7 +33,6 @@
 		CB139D7D2772923D000FD249 /* ScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerView.swift; sourceTree = "<group>"; };
 		CB139D7F2773A705000FD249 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CB139D802773AA38000FD249 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		CB139D822773ACC3000FD249 /* TextRecognition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognition.swift; sourceTree = "<group>"; };
 		CB139D9227762F9F000FD249 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
 		CB139D9327762F9F000FD249 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		CB139D9427762F9F000FD249 /* Restaurant+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Restaurant+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -72,12 +70,11 @@
 		CB139D69277291CB000FD249 /* Nnttawye */ = {
 			isa = PBXGroup;
 			children = (
+				CB5491642798B44000B36899 /* Views */,
 				CB785D34278E015000805482 /* Persistence */,
 				CB139D6A277291CB000FD249 /* NnttawyeApp.swift */,
 				CB139D6C277291CB000FD249 /* ContentView.swift */,
 				CB139D802773AA38000FD249 /* Model.swift */,
-				CB139D822773ACC3000FD249 /* TextRecognition.swift */,
-				CB139D7D2772923D000FD249 /* ScannerView.swift */,
 				CB785D32278DF81000805482 /* Utils.swift */,
 				CB139D6E277291CB000FD249 /* Assets.xcassets */,
 				CB139D7F2773A705000FD249 /* Info.plist */,
@@ -92,6 +89,14 @@
 				CB139D71277291CB000FD249 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CB5491642798B44000B36899 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CB139D7D2772923D000FD249 /* ScannerView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CB785D34278E015000805482 /* Persistence */ = {
@@ -180,7 +185,6 @@
 				CB139D9827762F9F000FD249 /* Restaurant+CoreDataClass.swift in Sources */,
 				CB139D74277291CB000FD249 /* Persistence.swift in Sources */,
 				CB139D9A27765B0E000FD249 /* ContentView.swift in Sources */,
-				CB139D832773ACC3000FD249 /* TextRecognition.swift in Sources */,
 				CB139D7E2772923D000FD249 /* ScannerView.swift in Sources */,
 				CB139D9927762F9F000FD249 /* Restaurant+CoreDataProperties.swift in Sources */,
 				CB139D9727762F9F000FD249 /* Food+CoreDataProperties.swift in Sources */,

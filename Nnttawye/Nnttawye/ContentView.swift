@@ -36,16 +36,16 @@ struct ContentView: View {
 
 struct PredictionView: View {
     @State private var isPressed: Bool = false
-    @State private var chosenMethod: Method = .caloriesLessThan2000
+    @State private var choseMethod: Method = .caloriesLessThan2000
     
     var body: some View {
         VStack {
             if isPressed {
-                GenView(chosenMethod: chosenMethod)
+                GenView(choseMethod: choseMethod, isPressed: $isPressed)
             } else {
                 Button {
                     isPressed = true
-                    chosenMethod = .randomizeSweetGreen
+                    choseMethod = .randomizeSweetGreen
                 } label: {
                     Text("Randomize Sweet Green")
                 }
@@ -53,7 +53,7 @@ struct PredictionView: View {
                 
                 Button {
                     isPressed = true
-                    chosenMethod = .caloriesLessThan2000
+                    choseMethod = .caloriesLessThan2000
                 } label: {
                     Text("Foods calores add up must less than 2000")
                 }
@@ -66,10 +66,10 @@ struct PredictionView: View {
 struct GenView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State private var rsts: [String: [String: Food]] = [:]
-    var chosenMethod: Method
+    var choseMethod: Method
+    @Binding var isPressed: Bool
     
     class Methods {
-
         // A default method allows Nntawye to regulate user's daily calories intake less than 2000
         static func default_DailyCaloriesLessThan2000(rsts: inout [String: [String: Food]]) {
             let persistenceController = PersistenceController.shared
@@ -89,6 +89,7 @@ struct GenView: View {
                 if fds.isEmpty {
                     fatalError("Not prop food")
                 }
+                fds.shuffle()
                 
                 var canDo: Bool = false
                 var dic: [String: Food] = [:]
@@ -116,64 +117,72 @@ struct GenView: View {
                     fatalError()
                 }
             }
-            print(rsts.debugDescription)
         }
         
+        static func default_MealShuffle(rsts: inout [String: [String: Food]]) {
+            
+        }
     }
 
     var body: some View {
-        List {
-            ForEach([rsts.keys.first(where: {$0 == "Mon"}),
-                     rsts.keys.first(where: {$0 == "Tue"}),
-                     rsts.keys.first(where: {$0 == "Wed"}),
-                     rsts.keys.first(where: {$0 == "Thu"}),
-                     rsts.keys.first(where: {$0 == "Fri"}),
-                     rsts.keys.first(where: {$0 == "Sat"}),
-                     rsts.keys.first(where: {$0 == "Sun"})], id: \.self) { key in
-                Section {
-                    VStack(alignment: .leading) {
-                        HStack {
-                            VStack(alignment: .leading) { 
-                                Text("\((rsts[key!]!["B"]!).name)")
-                                Text("$\((rsts[key!]!["B"]!).cost)")
-                                Text("\((rsts[key!]!["B"]!).calories) cal")
-                                Text("Some description")
-                            }
-                            Image("Food").resizable()
-                        }.background(Color.red)
-                        HStack {
+        VStack {
+            if choseMethod == .caloriesLessThan2000 {
+                List {
+                    ForEach([rsts.keys.first(where: {$0 == "Mon"}),
+                             rsts.keys.first(where: {$0 == "Tue"}),
+                             rsts.keys.first(where: {$0 == "Wed"}),
+                             rsts.keys.first(where: {$0 == "Thu"}),
+                             rsts.keys.first(where: {$0 == "Fri"}),
+                             rsts.keys.first(where: {$0 == "Sat"}),
+                             rsts.keys.first(where: {$0 == "Sun"})], id: \.self) { key in // todo: can't use ["Mon",...]?
+                        Section {
                             VStack(alignment: .leading) {
-                                Text("\((rsts[key!]!["L"]!).name)")
-                                Text("$\((rsts[key!]!["L"]!).cost)")
-                                Text("\((rsts[key!]!["L"]!).calories) cal")
-                                Text("Some description")
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text("\((rsts[key!]!["B"]!).name)")
+                                        Text("$\((rsts[key!]!["B"]!).cost)")
+                                        Text("\((rsts[key!]!["B"]!).calories) cal")
+                                        Text("Some description")
+                                    }
+                                    Image("Food").resizable()
+                                }.background(Color.red)
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text("\((rsts[key!]!["L"]!).name)")
+                                        Text("$\((rsts[key!]!["L"]!).cost)")
+                                        Text("\((rsts[key!]!["L"]!).calories) cal")
+                                        Text("Some description")
+                                    }
+                                    Image("Food").resizable()
+                                }.background(Color.green)
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text("\((rsts[key!]!["D"]!).name)")
+                                        Text("$\((rsts[key!]!["D"]!).cost)")
+                                        Text("\((rsts[key!]!["D"]!).calories) cal")
+                                        Text("Some description")
+                                    }
+                                    Image("Food").resizable()
+                                }.background(Color.blue)
                             }
-                            Image("Food").resizable()
-                        }.background(Color.green)
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text("\((rsts[key!]!["D"]!).name)")
-                                Text("$\((rsts[key!]!["D"]!).cost)")
-                                Text("\((rsts[key!]!["D"]!).calories) cal")
-                                Text("Some description")
-                            }
-                            Image("Food").resizable()
-                        }.background(Color.blue)
+                        } header: {
+                            Text(key!)
+                        }
                     }
-                } header: {
-                    Text(key!)
+                }.onAppear {
+                    // Initialize methods array
+                    rsts = ["Mon": [:], "Tue": [:], "Wed": [:], "Thu": [:], "Fri": [:], "Sat": [:], "Sun": [:]]
+                    
+                    if choseMethod == .caloriesLessThan2000 {
+                        Methods.default_DailyCaloriesLessThan2000(rsts: &rsts)
+                    } else if choseMethod == .randomizeSweetGreen{
+                        Methods.default_MealShuffle(rsts: &rsts)
+                    }
                 }
+            } else if choseMethod == .randomizeSweetGreen {
+                Text("hi")
             }
-        }.onAppear {
-            // Initialize methods array
-            rsts = ["Mon": [:], "Tue": [:], "Wed": [:], "Thu": [:], "Fri": [:], "Sat": [:], "Sun": [:]]
-            if chosenMethod == .caloriesLessThan2000 {
-                Methods.default_DailyCaloriesLessThan2000(rsts: &rsts)
-            } else if chosenMethod == .randomizeSweetGreen{
-                
-            }
-//            print(rsts.debugDescription)
-        }
+        }.navigationBarItems(trailing: Button("reset") { isPressed = false })
     }
 }
 

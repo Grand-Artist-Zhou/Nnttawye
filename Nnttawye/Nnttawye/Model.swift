@@ -36,3 +36,9 @@ class RecordModel: ObservableObject {
     @Published var carbohydrate: String = "0"
     @Published var sodium: String = "0"
 }
+
+//class GenViewModel: ObservableObject {
+//    func chooseView(method: Method) -> View {
+//        Text("")
+//    }
+//}
