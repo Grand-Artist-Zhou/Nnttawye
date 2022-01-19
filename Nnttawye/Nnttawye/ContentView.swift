@@ -65,19 +65,24 @@ struct PredictionView: View {
 
 struct GenView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @State private var rsts: [String: [String: Food]] = [:]
     var choseMethod: Method
     @Binding var isPressed: Bool
     
+    @State private var rsts: [String: [String: Food]] = [:]
+    
+    @State private var rstName: String = ""
+    @State private var fd: Food? = nil
+    @State private var fdType: FoodType = .default_
+    @State private var fdTime: FoodTime = .default_
+    
     class Methods {
+        static let persistenceController = PersistenceController.shared
+        static let viewContext = persistenceController.container.viewContext
+        static let fdFetchRequest: NSFetchRequest<Food> = Food.fetchRequest()
+        
         // A default method allows Nntawye to regulate user's daily calories intake less than 2000
         static func default_DailyCaloriesLessThan2000(rsts: inout [String: [String: Food]]) {
-            let persistenceController = PersistenceController.shared
-            let viewContext = persistenceController.container.viewContext
-            
-            let fdFetchRequest: NSFetchRequest<Food> = Food.fetchRequest()
             fdFetchRequest.predicate = NSPredicate(format: "calories <= %d", 2000)
-
             var fds: [Food] = []
             
             ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"].forEach { key in
@@ -119,8 +124,21 @@ struct GenView: View {
             }
         }
         
-        static func default_MealShuffle(rsts: inout [String: [String: Food]]) {
+        static func default_MealShuffle(fd: inout Food?) {
+            fdFetchRequest.predicate = NSPredicate(format: "name == %@", "fd") // todo: predicate time type rstname
+            var fds: [Food] = []
             
+            do {
+                fds = try viewContext.fetch(fdFetchRequest)
+            } catch {
+                fatalError("fetch error")
+            }
+            if fds.isEmpty {
+                fatalError("Not prop food")
+            }
+            fds.shuffle()
+            
+            fd = fds.first
         }
     }
 
@@ -170,17 +188,37 @@ struct GenView: View {
                         }
                     }
                 }.onAppear {
-                    // Initialize methods array
                     rsts = ["Mon": [:], "Tue": [:], "Wed": [:], "Thu": [:], "Fri": [:], "Sat": [:], "Sun": [:]]
-                    
-                    if choseMethod == .caloriesLessThan2000 {
-                        Methods.default_DailyCaloriesLessThan2000(rsts: &rsts)
-                    } else if choseMethod == .randomizeSweetGreen{
-                        Methods.default_MealShuffle(rsts: &rsts)
-                    }
+                    Methods.default_DailyCaloriesLessThan2000(rsts: &rsts)
                 }
             } else if choseMethod == .randomizeSweetGreen {
-                Text("hi")
+                VStack {
+                    HStack {
+                        Text("Restaurant Name: ")
+                        TextField("", text: $rstName)
+                    }
+                    HStack {
+                        Text("FoodType")
+                        Picker("", selection: $fdType) {
+                            Text("Main").tag(FoodType.main)
+                        }
+                    }
+                    HStack {
+                        Text("FoodTime")
+                        Picker("", selection: $fdTime) {
+                            Text("Morning").tag(FoodTime.morning)
+                            Text("Noon").tag(FoodTime.noon)
+                            Text("Night").tag(FoodTime.night)
+                        }
+                    }
+                    HStack {
+                        Text("Your lucky meal is: ")
+                        Text("\(fd?.name ?? "")")
+                    }
+                }
+                .onAppear() {
+                    Methods.default_MealShuffle(fd: &fd)
+                }
             }
         }.navigationBarItems(trailing: Button("reset") { isPressed = false })
     }
