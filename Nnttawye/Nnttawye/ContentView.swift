@@ -119,7 +119,7 @@ struct GenView: View {
             print(rsts.debugDescription)
         }
         
-    }  
+    }
 
     var body: some View {
         List {
@@ -127,7 +127,7 @@ struct GenView: View {
                 Section {
                     VStack(alignment: .leading) {
                         HStack {
-                            VStack(alignment: .leading) {
+                            VStack(alignment: .leading) { 
                                 Text("\((rsts[key]!["B"]!).name)") // todo
                                 Text("$\((rsts[key]!["B"]!).cost)")
                                 Text("\((rsts[key]!["B"]!).calories) cal")
