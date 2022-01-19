@@ -123,39 +123,45 @@ struct GenView: View {
 
     var body: some View {
         List {
-            ForEach(["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], id: \.self) { key in
+            ForEach([rsts.keys.first(where: {$0 == "Mon"}),
+                     rsts.keys.first(where: {$0 == "Tue"}),
+                     rsts.keys.first(where: {$0 == "Wed"}),
+                     rsts.keys.first(where: {$0 == "Thu"}),
+                     rsts.keys.first(where: {$0 == "Fri"}),
+                     rsts.keys.first(where: {$0 == "Sat"}),
+                     rsts.keys.first(where: {$0 == "Sun"})], id: \.self) { key in
                 Section {
                     VStack(alignment: .leading) {
                         HStack {
                             VStack(alignment: .leading) { 
-                                Text("\((rsts[key]!["B"]!).name)") // todo
-                                Text("$\((rsts[key]!["B"]!).cost)")
-                                Text("\((rsts[key]!["B"]!).calories) cal")
+                                Text("\((rsts[key!]!["B"]!).name)")
+                                Text("$\((rsts[key!]!["B"]!).cost)")
+                                Text("\((rsts[key!]!["B"]!).calories) cal")
                                 Text("Some description")
                             }
                             Image("Food").resizable()
                         }.background(Color.red)
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("\((rsts[key]!["L"]!).name)")
-                                Text("$\((rsts[key]!["L"]!).cost)")
-                                Text("\((rsts[key]!["L"]!).calories) cal")
+                                Text("\((rsts[key!]!["L"]!).name)")
+                                Text("$\((rsts[key!]!["L"]!).cost)")
+                                Text("\((rsts[key!]!["L"]!).calories) cal")
                                 Text("Some description")
                             }
                             Image("Food").resizable()
                         }.background(Color.green)
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("\((rsts[key]!["D"]!).name)")
-                                Text("$\((rsts[key]!["D"]!).cost)")
-                                Text("\((rsts[key]!["D"]!).calories) cal")
+                                Text("\((rsts[key!]!["D"]!).name)")
+                                Text("$\((rsts[key!]!["D"]!).cost)")
+                                Text("\((rsts[key!]!["D"]!).calories) cal")
                                 Text("Some description")
                             }
                             Image("Food").resizable()
                         }.background(Color.blue)
                     }
                 } header: {
-                    Text(key)
+                    Text(key!)
                 }
             }
         }.onAppear {
