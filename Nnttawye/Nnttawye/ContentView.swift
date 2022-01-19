@@ -119,7 +119,7 @@ struct GenView: View {
             print(rsts.debugDescription)
         }
         
-    }
+    }  
 
     var body: some View {
         List {
