@@ -306,23 +306,23 @@ struct AddView: View {
     @State private var isRecognizing = false
     
     var body: some View {
-        VStack{
+        VStack(alignment: .leading) {
             HStack {
-                Text("Restaurant")
+                Text("Food Name: ").font(.largeTitle)
+                TextField("", text: $recordModel.fdName)
+            } // todo: description, picture?
+            HStack {
+                Text("At which restaurant: ")
                 TextField("", text: $recordModel.rstName)
             }
             HStack {
-                Text("Food")
-                TextField("", text: $recordModel.fdName)
-            }
-            HStack {
-                Text("FoodType")
+                Text("Type: ")
                 Picker("", selection: $recordModel.fdType) {
                     Text("Main").tag(FoodType.main)
                 }
             }
             HStack {
-                Text("FoodTime")
+                Text("Time: ")
                 Picker("", selection: $recordModel.fdTime) {
                     Text("Morning").tag(FoodTime.morning)
                     Text("Noon").tag(FoodTime.noon)
@@ -330,23 +330,23 @@ struct AddView: View {
                 }
             }
             HStack {
-                Text("Cost")
+                Text("Cost: ")
                 TextField("", text: $recordModel.fdcost)
             }
             HStack {
-                Text("Calories")
+                Text("Calories: ")
                 TextField("", text: $recordModel.calories)
             }
             HStack {
-                Text("Fat")
+                Text("Fat: ")
                 TextField("", text: $recordModel.fat)
             }
             HStack {
-                Text("Sodium")
+                Text("Sodium: ")
                 TextField("", text: $recordModel.sodium)
             }
             HStack {
-                Text("Carbohydrate")
+                Text("Carbohydrate: ")
                 TextField("", text: $recordModel.carbohydrate)
             }
             Button("Save") {
