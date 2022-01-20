@@ -45,9 +45,9 @@ struct PredictionView: View {
             } else {
                 Button {
                     isPressed = true
-                    choseMethod = .randomizeSweetGreen
+                    choseMethod = .menuShuffler
                 } label: {
-                    Text("Randomize Sweet Green")
+                    Text("Menu shuffler")
                 }
                 .buttonStyle(BlueButton())
                 
@@ -55,7 +55,7 @@ struct PredictionView: View {
                     isPressed = true
                     choseMethod = .caloriesLessThan2000
                 } label: {
-                    Text("Foods calores add up must less than 2000")
+                    Text("Daily calores less than 2000 cal")
                 }
                 .buttonStyle(BlueButton())
             }
@@ -72,8 +72,8 @@ struct GenView: View {
     
     @State private var rstName: String = ""
     @State private var fd: Food? = nil
-    @State private var fdType: FoodType = .default_
-    @State private var fdTime: FoodTime = .default_
+    @State private var fdType: FoodType = .main
+    @State private var fdTime: FoodTime = .morning
     
     class Methods {
         static let persistenceController = PersistenceController.shared
@@ -124,8 +124,8 @@ struct GenView: View {
             }
         }
         
-        static func default_MealShuffle(fd: inout Food?) {
-            fdFetchRequest.predicate = NSPredicate(format: "name == %@", "fd") // todo: predicate time type rstname
+        static func default_MealShuffle(fd: inout Food?, fdTime: FoodTime, fdType: FoodType, rstName: String) {
+            fdFetchRequest.predicate = NSPredicate(format: "time == %@ && type == %@ && origin.name == %@", fdTime.rawValue, fdType.rawValue, rstName) // todo:
             var fds: [Food] = []
             
             do {
@@ -134,7 +134,7 @@ struct GenView: View {
                 fatalError("fetch error")
             }
             if fds.isEmpty {
-                fatalError("Not prop food")
+
             }
             fds.shuffle()
             
@@ -191,8 +191,8 @@ struct GenView: View {
                     rsts = ["Mon": [:], "Tue": [:], "Wed": [:], "Thu": [:], "Fri": [:], "Sat": [:], "Sun": [:]]
                     Methods.default_DailyCaloriesLessThan2000(rsts: &rsts)
                 }
-            } else if choseMethod == .randomizeSweetGreen {
-                VStack {
+            } else if choseMethod == .menuShuffler {
+                VStack(alignment: .center) {
                     HStack {
                         Text("Restaurant Name: ")
                         TextField("", text: $rstName)
@@ -215,9 +215,9 @@ struct GenView: View {
                         Text("Your lucky meal is: ")
                         Text("\(fd?.name ?? "")")
                     }
-                }
-                .onAppear() {
-                    Methods.default_MealShuffle(fd: &fd)
+                    Button("Evaluate") {
+                        Methods.default_MealShuffle(fd: &fd, fdTime: fdTime, fdType: fdType, rstName: rstName)
+                    }
                 }
             }
         }.navigationBarItems(trailing: Button("reset") { isPressed = false })

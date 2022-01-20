@@ -20,11 +20,6 @@ struct BlueButton: ButtonStyle {
     }
 }
 
-enum Method {
-    case caloriesLessThan2000
-    case randomizeSweetGreen
-}
-
 struct TextRecognition {
     var scannedImages: [UIImage]
     @EnvironmentObject var recordModel: RecordModel

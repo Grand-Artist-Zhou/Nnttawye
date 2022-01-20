@@ -9,11 +9,15 @@ import Foundation
 import SwiftUI
 
 public enum FoodType: String {
-    case default_, main
+    case main
 }
 
 public enum FoodTime: String {
-    case default_, morning, noon, night
+    case morning, noon, night
+}
+
+enum Method {
+    case caloriesLessThan2000, menuShuffler
 }
 
 class TextItem: Identifiable {
@@ -25,10 +29,10 @@ class TextItem: Identifiable {
 }
 
 class RecordModel: ObservableObject {
-    @Published var rstName: String = "None"
-    @Published var fdName: String = "None"
-    @Published var fdType: FoodType = .default_
-    @Published var fdTime: FoodTime = .default_
+    @Published var rstName: String = "R"
+    @Published var fdName: String = "F"
+    @Published var fdType: FoodType = .main
+    @Published var fdTime: FoodTime = .morning
     @Published var fdcost: String = "0"
     
     @Published var calories: String = "0"
@@ -36,9 +40,3 @@ class RecordModel: ObservableObject {
     @Published var carbohydrate: String = "0"
     @Published var sodium: String = "0"
 }
-
-//class GenViewModel: ObservableObject {
-//    func chooseView(method: Method) -> View {
-//        Text("")
-//    }
-//}

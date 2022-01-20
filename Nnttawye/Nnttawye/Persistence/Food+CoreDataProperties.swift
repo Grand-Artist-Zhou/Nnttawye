@@ -23,17 +23,17 @@ extension Food {
             type = newValue.rawValue
         }
         get {
-            FoodType(rawValue: type) ?? .default_
+            FoodType(rawValue: type) ?? .main
         }
     }
     
     @NSManaged public var time: String
     var fdTime: FoodTime {
         set {
-            type = newValue.rawValue
+            time = newValue.rawValue
         }
         get {
-            FoodTime(rawValue: time) ?? .default_
+            FoodTime(rawValue: time) ?? .morning
         }
     }
     @NSManaged public var cost: Float
@@ -42,7 +42,8 @@ extension Food {
     @NSManaged public var calories: Float
     @NSManaged public var carbohydrate: Float
     @NSManaged public var sodium: Float
-    
+    @NSManaged public var origin: Restaurant
+
 }
 
 extension Food : Identifiable {
