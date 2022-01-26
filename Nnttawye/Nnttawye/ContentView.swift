@@ -304,17 +304,22 @@ struct AddView: View {
     
     @State private var showScanner = false
     @State private var isRecognizing = false
+    @State private var multiSelection = Set<UUID>()
+    let items: [Bookmark] = [.g1]
     
     var body: some View {
         VStack(alignment: .leading) {
-            Group { // mark: using group to temprily solve extra view problems
+            HStack {
+                Text("Food Name: ").font(.largeTitle)
+                TextField("", text: $recordModel.fdName)
+            }
+            List(items, children: \.items, selection: $multiSelection) {row in
                 HStack {
-                    Text("Food Name: ").font(.largeTitle)
-                    TextField("", text: $recordModel.fdName)
+                    Image(systemName: row.icon)
+                    Text(row.name)
                 }
-                Spacer()
-                Text("placeholder")
-                Spacer()
+            }
+            List() {
                 HStack {
                     Text("At which restaurant: ")
                     TextField("", text: $recordModel.rstName)
@@ -323,46 +328,46 @@ struct AddView: View {
                     Text("Description: ")
                     TextField("", text: $recordModel.description)
                 }
-            }
-            HStack {
-                Text("Picture: ")
-                Button(action: {}) {
-                    Label("Add Picture", systemImage: "photo")
+                HStack {
+                    Text("Picture: ")
+                    Button(action: {}) {
+                        Label("Add Picture", systemImage: "photo")
+                    }
                 }
-            }
-            HStack {
-                Text("Type: ")
-                Picker("", selection: $recordModel.fdType) {
-                    Text("Main").tag(FoodType.main)
+                HStack {
+                    Text("Type: ")
+                    Picker("", selection: $recordModel.fdType) {
+                        Text("Main").tag(FoodType.main)
+                    }
                 }
-            }
-            HStack {
-                Text("Time: ")
-                Picker("", selection: $recordModel.fdTime) {
-                    Text("Morning").tag(FoodTime.morning)
-                    Text("Noon").tag(FoodTime.noon)
-                    Text("Night").tag(FoodTime.night)
+                HStack {
+                    Text("Time: ")
+                    Picker("", selection: $recordModel.fdTime) {
+                        Text("Morning").tag(FoodTime.morning)
+                        Text("Noon").tag(FoodTime.noon)
+                        Text("Night").tag(FoodTime.night)
+                    }
                 }
-            }
-            HStack {
-                Text("Cost: ")
-                TextField("", text: $recordModel.fdcost)
-            }
-            HStack {
-                Text("Calories: ")
-                TextField("", text: $recordModel.calories)
-            }
-            HStack {
-                Text("Fat: ")
-                TextField("", text: $recordModel.fat)
-            }
-            HStack {
-                Text("Sodium: ")
-                TextField("", text: $recordModel.sodium)
-            }
-            HStack {
-                Text("Carbohydrate: ")
-                TextField("", text: $recordModel.carbohydrate)
+                HStack {
+                    Text("Cost: ")
+                    TextField("", text: $recordModel.fdcost)
+                }
+                HStack {
+                    Text("Calories: ")
+                    TextField("", text: $recordModel.calories)
+                }
+                HStack {
+                    Text("Fat: ")
+                    TextField("", text: $recordModel.fat)
+                }
+                HStack {
+                    Text("Sodium: ")
+                    TextField("", text: $recordModel.sodium)
+                }
+                HStack {
+                    Text("Carbohydrate: ")
+                    TextField("", text: $recordModel.carbohydrate)
+                }
             }
             Button("Save") {
                 let rst: Restaurant
