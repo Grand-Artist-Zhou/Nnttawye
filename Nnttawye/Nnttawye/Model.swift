@@ -28,12 +28,14 @@ class TextItem: Identifiable {
     var sodium: String = ""
 }
 
-class RecordModel: ObservableObject {
+class RecordModel: ObservableObject { // todo: may not need it?
     @Published var rstName: String = "R"
     @Published var fdName: String = "F"
     @Published var fdType: FoodType = .main
     @Published var fdTime: FoodTime = .morning
     @Published var fdcost: String = "0"
+    @Published var description: String = ""
+    @Published var picture: String = ""
     
     @Published var calories: String = "0"
     @Published var fat: String = "0"

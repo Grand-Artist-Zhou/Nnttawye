@@ -307,13 +307,28 @@ struct AddView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            Group { // mark: using group to temprily solve extra view problems
+                HStack {
+                    Text("Food Name: ").font(.largeTitle)
+                    TextField("", text: $recordModel.fdName)
+                }
+                Spacer()
+                Text("placeholder")
+                Spacer()
+                HStack {
+                    Text("At which restaurant: ")
+                    TextField("", text: $recordModel.rstName)
+                }
+                HStack {
+                    Text("Description: ")
+                    TextField("", text: $recordModel.description)
+                }
+            }
             HStack {
-                Text("Food Name: ").font(.largeTitle)
-                TextField("", text: $recordModel.fdName)
-            } // todo: description, picture?
-            HStack {
-                Text("At which restaurant: ")
-                TextField("", text: $recordModel.rstName)
+                Text("Picture: ")
+                Button(action: {}) {
+                    Label("Add Picture", systemImage: "photo")
+                }
             }
             HStack {
                 Text("Type: ")
