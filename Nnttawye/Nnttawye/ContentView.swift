@@ -304,7 +304,7 @@ struct AddView: View {
     
     @State private var showScanner = false
     @State private var isRecognizing = false
-    @State private var multiSelection = Set<UUID>()
+    @State private var multiSelection = Set<String>()
     let items: [Bookmark] = [.g1]
     
     var body: some View {
@@ -313,62 +313,73 @@ struct AddView: View {
                 Text("Food Name: ").font(.largeTitle)
                 TextField("", text: $recordModel.fdName)
             }
-            List(items, children: \.items, selection: $multiSelection) {row in
+            List(items, children: \.items, selection: $multiSelection) { row in
                 HStack {
                     Image(systemName: row.icon)
                     Text(row.name)
                 }
+            } .toolbar { EditButton() }
+            if multiSelection.contains("Apple") {
+                Text("yes")
             }
-            List() {
-                HStack {
-                    Text("At which restaurant: ")
-                    TextField("", text: $recordModel.rstName)
-                }
-                HStack {
-                    Text("Description: ")
-                    TextField("", text: $recordModel.description)
-                }
-                HStack {
-                    Text("Picture: ")
-                    Button(action: {}) {
-                        Label("Add Picture", systemImage: "photo")
-                    }
-                }
-                HStack {
-                    Text("Type: ")
-                    Picker("", selection: $recordModel.fdType) {
-                        Text("Main").tag(FoodType.main)
-                    }
-                }
-                HStack {
-                    Text("Time: ")
-                    Picker("", selection: $recordModel.fdTime) {
-                        Text("Morning").tag(FoodTime.morning)
-                        Text("Noon").tag(FoodTime.noon)
-                        Text("Night").tag(FoodTime.night)
-                    }
-                }
-                HStack {
-                    Text("Cost: ")
-                    TextField("", text: $recordModel.fdcost)
-                }
-                HStack {
-                    Text("Calories: ")
-                    TextField("", text: $recordModel.calories)
-                }
-                HStack {
-                    Text("Fat: ")
-                    TextField("", text: $recordModel.fat)
-                }
-                HStack {
-                    Text("Sodium: ")
-                    TextField("", text: $recordModel.sodium)
-                }
-                HStack {
-                    Text("Carbohydrate: ")
-                    TextField("", text: $recordModel.carbohydrate)
-                }
-            }
+//            if {
+//
+//            } else if {
+//
+//            } else if {
+//
+//            } else if {
+//
+//            }
+            
+//            HStack {
+//                Text("At which restaurant: ")
+//                TextField("", text: $recordModel.rstName)
+//            }
+//            HStack {
+//                Text("Description: ")
+//                TextField("", text: $recordModel.description)
+//            }
+//            HStack {
+//                Text("Picture: ")
+//                Button(action: {}) {
+//                    Label("Add Picture", systemImage: "photo")
+//                }
+//            }
+//            HStack {
+//                Text("Type: ")
+//                Picker("", selection: $recordModel.fdType) {
+//                    Text("Main").tag(FoodType.main)
+//                }
+//            }
+//            HStack {
+//                Text("Time: ")
+//                Picker("", selection: $recordModel.fdTime) {
+//                    Text("Morning").tag(FoodTime.morning)
+//                    Text("Noon").tag(FoodTime.noon)
+//                    Text("Night").tag(FoodTime.night)
+//                }
+//            }
+//            HStack {
+//                Text("Cost: ")
+//                TextField("", text: $recordModel.fdcost)
+//            }
+//            HStack {
+//                Text("Calories: ")
+//                TextField("", text: $recordModel.calories)
+//            }
+//            HStack {
+//                Text("Fat: ")
+//                TextField("", text: $recordModel.fat)
+//            }
+//            HStack {
+//                Text("Sodium: ")
+//                TextField("", text: $recordModel.sodium)
+//            }
+//            HStack {
+//                Text("Carbohydrate: ")
+//                TextField("", text: $recordModel.carbohydrate)
+//            }
             Button("Save") {
                 let rst: Restaurant
                 rsts.nsPredicate = NSPredicate(format: "name == %@", recordModel.rstName)
