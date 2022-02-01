@@ -319,9 +319,9 @@ struct AddView: View {
                     Text(row.name)
                 }
             } .toolbar { EditButton() }
-            if multiSelection.contains("Apple") {
-                Text("yes")
-            }
+//            if multiSelection.contains("Apple") {
+//                Text("yes")
+//            }
 //            if {
 //
 //            } else if {
