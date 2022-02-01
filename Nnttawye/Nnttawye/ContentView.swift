@@ -304,8 +304,31 @@ struct AddView: View {
     
     @State private var showScanner = false
     @State private var isRecognizing = false
-    @State private var multiSelection = Set<String>()
-    let items: [Bookmark] = [.g1]
+    
+    let items: [Icon] = [.g1]
+    @State var selections: [String] = []
+    
+    struct MultipleSelectionRow: View {
+        var title: String
+        var isSelected: Bool
+        var action: () -> Void
+
+        var body: some View {
+            if title != "Title" {
+                Button(action: self.action) {
+                    HStack {
+                        Text(self.title)
+                        if self.isSelected {
+                            Spacer()
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+            } else {
+                Text("Title")
+            }
+        }
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -313,39 +336,39 @@ struct AddView: View {
                 Text("Food Name: ").font(.largeTitle)
                 TextField("", text: $recordModel.fdName)
             }
-            List(items, children: \.items, selection: $multiSelection) { row in
-                HStack {
-                    Image(systemName: row.icon)
-                    Text(row.name)
-                }
-            } .toolbar { EditButton() }
-//            if multiSelection.contains("Apple") {
-//                Text("yes")
-//            }
-//            if {
-//
-//            } else if {
-//
-//            } else if {
-//
-//            } else if {
-//
-//            }
             
-//            HStack {
-//                Text("At which restaurant: ")
-//                TextField("", text: $recordModel.rstName)
-//            }
-//            HStack {
-//                Text("Description: ")
-//                TextField("", text: $recordModel.description)
-//            }
-//            HStack {
-//                Text("Picture: ")
-//                Button(action: {}) {
-//                    Label("Add Picture", systemImage: "photo")
-//                }
-//            }
+            List(items, children: \.items) { item in
+                MultipleSelectionRow(title: item.name, isSelected: self.selections.contains(item.name)) {
+                    if self.selections.contains(item.name) {
+                        self.selections.removeAll(where: { $0 == item.name })
+                    }
+                    else if item.name != "Title" {
+                        self.selections.append(item.name)
+                    }
+                }
+            }
+            
+            if selections.contains("Which Res") {
+                HStack {
+                    Text("Which restaurant: ")
+                    TextField("", text: $recordModel.rstName)
+                }
+            }
+            if selections.contains("Description") {
+                HStack {
+                    Text("Description: ")
+                    TextField("", text: $recordModel.description)
+                }
+            }
+            if selections.contains("Picture") {
+                HStack {
+                    Text("Picture: ")
+                    Button(action: {}) {
+                        Label("Add Picture", systemImage: "photo")
+                    }
+                }
+            }
+
 //            HStack {
 //                Text("Type: ")
 //                Picker("", selection: $recordModel.fdType) {
@@ -380,6 +403,8 @@ struct AddView: View {
 //                Text("Carbohydrate: ")
 //                TextField("", text: $recordModel.carbohydrate)
 //            }
+            
+  
             Button("Save") {
                 let rst: Restaurant
                 rsts.nsPredicate = NSPredicate(format: "name == %@", recordModel.rstName)

@@ -9,20 +9,18 @@ import Foundation
 import SwiftUI
 import Vision
 
-struct Bookmark: Identifiable {
-    let id = UUID()
+struct Icon: Identifiable {
+    let id: UUID = UUID()
     let name: String
     let icon: String
-    var items: [Bookmark]?
+    var items: [Icon]?
 
-    // some example websites
-    static let apple = Bookmark(name: "Apple", icon: "1.circle")
-    static let bbc = Bookmark(name: "BBC", icon: "square.and.pencil")
-    static let swift = Bookmark(name: "Swift", icon: "bolt.fill")
-    static let twitter = Bookmark(name: "Twitter", icon: "mic")
+    static let res = Icon(name: "Which Res", icon: "square.and.pencil")
+    static let des = Icon(name: "Description", icon: "bolt.fill")
+    static let pic = Icon(name: "Picture", icon: "mic")
 
     // some example groups
-    static let g1 = Bookmark(name: "Favorites", icon: "star", items: [Bookmark.apple, Bookmark.bbc, Bookmark.swift, Bookmark.twitter])
+    static let g1 = Icon(name: "Title", icon: "star", items: [Icon.res, Icon.des, Icon.pic])
 }
 
 struct BlueButton: ButtonStyle {
